@@ -1,3 +1,11 @@
+Readfacevmd itself is under the MIT license.
+
+Note: You have to respect the licenses of the libraries and datasets.
+Especially, commercial use of OpenFace is not allowed unless you have
+a commercial license of OpenFace toolkit.
+
+============================================
+
 MIT License
 
 Copyright (c) 2018 errno_mmd

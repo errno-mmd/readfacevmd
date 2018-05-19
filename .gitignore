@@ -1,3 +1,16 @@
+.backup/
+.memo/
+build/
+output/
+test_movie/
+test_image*
+
+*~
+TAGS
+GTAGS
+GRTAGS
+GPATH
+
 # Prerequisites
 *.d
 
