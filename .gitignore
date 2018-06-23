@@ -1,9 +1,8 @@
-.backup/
-.memo/
-build/
-output/
-test_movie/
-test_image*
+/.backup/
+/.memo/
+/build/
+/output/
+/test_*
 
 *~
 TAGS

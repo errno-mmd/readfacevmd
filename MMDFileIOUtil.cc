@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include <unicode/ucnv.h>
+#include <unicode/unistr.h>
 #include <assert.h>
 #include "MMDFileIOUtil.h"
 
