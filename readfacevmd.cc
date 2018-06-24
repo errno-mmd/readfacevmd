@@ -4,8 +4,7 @@
 #include <LandmarkCoreIncludes.h>
 #include <FaceAnalyser.h>
 #include <SequenceCapture.h>
-//#include <RecorderOpenFace.h>
-//#include <RecorderOpenFaceParameters.h>
+#include <GazeEstimation.h>
 
 #include <opencv2/core/core.hpp>
 #include <boost/filesystem.hpp>
@@ -57,11 +56,17 @@ enum AUID {
 const int AU_SIZE = 46;
 const double ACTION_UNIT_MAXVAL = 5.0;
 
-// 頭の向き(回転)のキーフレームを VMD_Frame の vector に格納する
-void add_head_pose(vector<VMD_Frame>& frame_vec, Quaterniond rot, uint32_t frame_number)
+void dumprot(Quaterniond rot, string name)
+{
+  Vector3d v = rot.toRotationMatrix().eulerAngles(0, 1, 2);
+  cout << name << ": " << v.x() * 180 / M_PI << "," << v.y()  * 180 / M_PI << "," << v.z()  * 180 / M_PI << endl;
+}
+
+
+// 回転のキーフレームを VMD_Frame の vector に追加する
+void add_rotation_pose(vector<VMD_Frame>& frame_vec, Quaterniond rot, uint32_t frame_number, string bone_name)
 {
     VMD_Frame frame;
-    string bone_name = "頭";
     MMDFileIOUtil::utf8_to_sjis(bone_name, frame.bonename, frame.bonename_len);
     frame.number = frame_number;
     frame.rotation.w() = rot.w();
@@ -69,6 +74,42 @@ void add_head_pose(vector<VMD_Frame>& frame_vec, Quaterniond rot, uint32_t frame
     frame.rotation.y() = rot.y();
     frame.rotation.z() = rot.z();
     frame_vec.push_back(frame);
+}
+  
+// 頭の向き(回転)のキーフレームを VMD_Frame の vector に格納する
+void add_head_pose(vector<VMD_Frame>& frame_vec, Quaterniond rot, uint32_t frame_number)
+{
+  string bone_name = "頭";
+  add_rotation_pose(frame_vec, rot, frame_number, bone_name);
+}
+
+// 目の向き(回転)のキーフレームを VMD_Frame の vector に追加する
+void add_gaze_pose(vector<VMD_Frame>& frame_vec, cv::Point3f gazedir_left, cv::Point3f gazedir_right,
+		   Quaterniond head_rot, uint32_t frame_number)
+{
+  //  cout << "gazedir_left:" << gazedir_left << endl;
+  //  cout << "gazedir_right:" << gazedir_right << endl;
+  string bone_name = "両目";
+  Vector3d front = head_rot * Vector3d(0, 0, -1);
+  Vector3d leftdir;
+  leftdir.x() = gazedir_left.x;
+  leftdir.y() = - gazedir_left.y;
+  leftdir.z() = gazedir_left.z;
+  Quaterniond rot_left = Quaterniond::FromTwoVectors(front, leftdir);
+  add_rotation_pose(frame_vec, rot_left, frame_number, bone_name);
+  //  cout << "leftdir:" << leftdir.x() << "," << leftdir.y() << "," << leftdir.z() << endl;
+  //  cout << "front:" << front.x() << "," << front.y() << "," << front.z() << endl;
+  //  dumprot(rot_left, "rot_left");
+  
+  bone_name = "右目";
+  Vector3d rightdir;
+  rightdir.x() = gazedir_right.x;
+  rightdir.y() = - gazedir_right.y;
+  rightdir.z() = gazedir_right.z;
+  Quaterniond rot_right = Quaterniond::FromTwoVectors(front, rightdir);
+  add_rotation_pose(frame_vec, rot_right, frame_number, bone_name);
+  //  cout << "rightdir:" << rightdir.x() << "," << rightdir.y() << "," << rightdir.z() << endl;
+  //  dumprot(rot_right, "rot_right");
 }
 
 // 表情フレームを VMD_Skin の vector に追加する 
@@ -211,7 +252,14 @@ int estimate_face_vmd(char* image_file_name, char* vmd_file_name)
     get_action_unit(action_unit, face_analyser);
     estimate_facial_expression(vmd.skin, action_unit, frame_number);
 
-    // TODO: Gazeの方向に合わせて「両目」ボーンを回転させる？
+    // 目の向きを推定する
+    if (face_model.eye_model) {
+      cv::Point3f gazedir_left(0, 0, -1);
+      cv::Point3f gazedir_right(0, 0, -1);
+      GazeAnalysis::EstimateGaze(face_model, gazedir_left, cap.fx, cap.fy, cap.cx, cap.cy, true);
+      GazeAnalysis::EstimateGaze(face_model, gazedir_right, cap.fx, cap.fy, cap.cx, cap.cy, false);
+      add_gaze_pose(vmd.frame, gazedir_left, gazedir_right, rot_vmd, frame_number);
+    }
   }
 
   cout << "VMD output start" << endl;
@@ -220,6 +268,7 @@ int estimate_face_vmd(char* image_file_name, char* vmd_file_name)
   vmd.output(out);
   out.close();
   cout << "VMD output end" << endl;
+  return 0;
 }
 
 int main(int argc, char* argv[])

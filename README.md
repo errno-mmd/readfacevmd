@@ -63,17 +63,21 @@ This tool heavily depends on [OpenFace](https://github.com/TadasBaltrusaitis/Ope
 an open source facial behavior analysis toolkit.
 Please refer the following works for the details of OpenFace.
 
-**OpenFace 2.0: Facial Behavior Analysis Toolkit**
+**OpenFace 2.0: Facial Behavior Analysis Toolkit** :
 Tadas Baltrušaitis, Amir Zadeh, Yao Chong Lim, and Louis-Philippe Morency,
 IEEE International Conference on Automatic Face and Gesture Recognition, 2018
 
-**Convolutional experts constrained local model for facial landmark detection**
+**Convolutional experts constrained local model for facial landmark detection** :
 A. Zadeh, T. Baltrušaitis, and Louis-Philippe Morency.
 Computer Vision and Pattern Recognition Workshops, 2017
 
-**Constrained Local Neural Fields for robust facial landmark detection in the wild**
+**Constrained Local Neural Fields for robust facial landmark detection in the wild** :
 Tadas Baltrušaitis, Peter Robinson, and Louis-Philippe Morency.
 in IEEE Int. Conference on Computer Vision Workshops, 300 Faces in-the-Wild Challenge, 2013.
 
-**Cross-dataset learning and person-specific normalisation for automatic Action Unit detection** Tadas Baltrušaitis, Marwa Mahmoud, and Peter Robinson in Facial Expression Recognition and Analysis Challenge,
+**Rendering of Eyes for Eye-Shape Registration and Gaze Estimation Erroll Wood** :
+Tadas Baltrušaitis, Xucong Zhang, Yusuke Sugano, Peter Robinson, and Andreas Bulling in IEEE International. Conference on Computer Vision (ICCV), 2015
+
+**Cross-dataset learning and person-specific normalisation for automatic Action Unit detection** :
+Tadas Baltrušaitis, Marwa Mahmoud, and Peter Robinson in Facial Expression Recognition and Analysis Challenge,
 IEEE International Conference on Automatic Face and Gesture Recognition, 2015
