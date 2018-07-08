@@ -18,6 +18,9 @@
 #include "MMDFileIOUtil.h"
 #include "VMD.h"
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 using namespace std;
 using namespace Eigen;
 
@@ -56,7 +59,7 @@ enum AUID {
 const int AU_SIZE = 46;
 const double ACTION_UNIT_MAXVAL = 5.0;
 
-void dumprot(Quaterniond rot, string name)
+void dumprot(const Quaterniond& rot, string name)
 {
   Vector3d v = rot.toRotationMatrix().eulerAngles(0, 1, 2);
   cout << name << ": " << v.x() * 180 / M_PI << "," << v.y()  * 180 / M_PI << "," << v.z()  * 180 / M_PI << endl;
@@ -64,7 +67,7 @@ void dumprot(Quaterniond rot, string name)
 
 
 // 回転のキーフレームを VMD_Frame の vector に追加する
-void add_rotation_pose(vector<VMD_Frame>& frame_vec, Quaterniond rot, uint32_t frame_number, string bone_name)
+void add_rotation_pose(vector<VMD_Frame>& frame_vec, const Quaterniond& rot, uint32_t frame_number, string bone_name)
 {
     VMD_Frame frame;
     MMDFileIOUtil::utf8_to_sjis(bone_name, frame.bonename, frame.bonename_len);
@@ -77,19 +80,19 @@ void add_rotation_pose(vector<VMD_Frame>& frame_vec, Quaterniond rot, uint32_t f
 }
   
 // 頭の向き(回転)のキーフレームを VMD_Frame の vector に格納する
-void add_head_pose(vector<VMD_Frame>& frame_vec, Quaterniond rot, uint32_t frame_number)
+void add_head_pose(vector<VMD_Frame>& frame_vec, const Quaterniond& rot, uint32_t frame_number)
 {
-  string bone_name = "頭";
+  string bone_name = u8"頭";
   add_rotation_pose(frame_vec, rot, frame_number, bone_name);
 }
 
 // 目の向き(回転)のキーフレームを VMD_Frame の vector に追加する
 void add_gaze_pose(vector<VMD_Frame>& frame_vec, cv::Point3f gazedir_left, cv::Point3f gazedir_right,
-		   Quaterniond head_rot, uint32_t frame_number)
+		   const Quaterniond& head_rot, uint32_t frame_number)
 {
   //  cout << "gazedir_left:" << gazedir_left << endl;
   //  cout << "gazedir_right:" << gazedir_right << endl;
-  string bone_name = "両目";
+  string bone_name = u8"両目";
   Vector3d front = head_rot * Vector3d(0, 0, -1);
   Vector3d leftdir;
   leftdir.x() = gazedir_left.x;
@@ -101,7 +104,7 @@ void add_gaze_pose(vector<VMD_Frame>& frame_vec, cv::Point3f gazedir_left, cv::P
   //  cout << "front:" << front.x() << "," << front.y() << "," << front.z() << endl;
   //  dumprot(rot_left, "rot_left");
   
-  bone_name = "右目";
+  bone_name = u8"右目";
   Vector3d rightdir;
   rightdir.x() = gazedir_right.x;
   rightdir.y() = - gazedir_right.y;
@@ -171,10 +174,10 @@ void estimate_facial_expression(vector<VMD_Skin>& skin_vec, double* au, uint32_t
   }
   double mouth_smile = au[AUID::LipCornerPuller];
 
-  add_skin_frame(skin_vec, "あ", frame_number, mouth_a);
-  add_skin_frame(skin_vec, "い", frame_number, mouth_i);
-  add_skin_frame(skin_vec, "う", frame_number, mouth_u);
-  add_skin_frame(skin_vec, "にやり", frame_number, mouth_smile);
+  add_skin_frame(skin_vec, u8"あ", frame_number, mouth_a);
+  add_skin_frame(skin_vec, u8"い", frame_number, mouth_i);
+  add_skin_frame(skin_vec, u8"う", frame_number, mouth_u);
+  add_skin_frame(skin_vec, u8"にやり", frame_number, mouth_smile);
 
   // 目
   double blink = au[AUID::LidTightener];
@@ -187,13 +190,13 @@ void estimate_facial_expression(vector<VMD_Skin>& skin_vec, double* au, uint32_t
     eye_smile = blink;
     blink = 0;
   }
-  add_skin_frame(skin_vec, "まばたき", frame_number, blink);
-  add_skin_frame(skin_vec, "笑い", frame_number, eye_smile);
+  add_skin_frame(skin_vec, u8"まばたき", frame_number, blink);
+  add_skin_frame(skin_vec, u8"笑い", frame_number, eye_smile);
 
   // 眉
-  add_skin_frame(skin_vec, "にこり", frame_number, au[AUID::InnerBrowRaiser]);
-  add_skin_frame(skin_vec, "怒り", frame_number, au[AUID::OuterBrowRaiser]);
-  add_skin_frame(skin_vec, "下", frame_number, au[AUID::BrowLowerer]);
+  add_skin_frame(skin_vec, u8"にこり", frame_number, au[AUID::InnerBrowRaiser]);
+  add_skin_frame(skin_vec, u8"怒り", frame_number, au[AUID::OuterBrowRaiser]);
+  add_skin_frame(skin_vec, u8"下", frame_number, au[AUID::BrowLowerer]);
 }
 
 void init_vmd_header(VMD_Header& h)

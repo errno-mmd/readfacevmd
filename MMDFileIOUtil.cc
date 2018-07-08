@@ -20,6 +20,7 @@ using std::string;
 using std::wstring;
 using std::vector;
 using namespace Eigen;
+using namespace icu;
 
 void MMDFileIOUtil::readFloat(ifstream& s, float& f)
 {
@@ -156,7 +157,7 @@ void MMDFileIOUtil::readStringUtf16le(ifstream& s, string& str, int size)
 // sからUTF-8文字列をsize byte読み、strに格納する。
 void MMDFileIOUtil::readStringUtf8(ifstream& s, string& str, int size)
 {
-  char buf[size + 1];
+  char* buf = new char[size + 1];
   s.read(buf, size);
   buf[size] = '\0';
   str = buf; // copy
@@ -164,7 +165,7 @@ void MMDFileIOUtil::readStringUtf8(ifstream& s, string& str, int size)
 
 void MMDFileIOUtil::sjis_to_utf8(const char* from, string& str, int size)
 {
-  char buf_in[size + 1];
+  char* buf_in = new char[size + 1];
   strncpy(buf_in, from, size);
   buf_in[size] = '\0';
 
@@ -227,7 +228,7 @@ void MMDFileIOUtil::utf8_to_sjis(const string& from, char* to, int size_to)
 // sからShift-JIS文字列をsize byte読み、UTF-8に変換してstrに格納する。
 void MMDFileIOUtil::readStringSJIS(ifstream& s, string& str, int size)
 {
-  char buf_in[size + 1];
+  char* buf_in = new char[size + 1];
   s.read(buf_in, size);
   buf_in[size] = '\0';
   sjis_to_utf8(buf_in, str, size);
