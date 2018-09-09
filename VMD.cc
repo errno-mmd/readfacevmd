@@ -35,7 +35,7 @@ void VMD_Frame::read(ifstream& s)
   }
 }
 
-void VMD_Skin::read(ifstream& s)
+void VMD_Morph::read(ifstream& s)
 {
   readCharArray(s, name, name_len);
   readUint32(s, frame);
@@ -109,14 +109,14 @@ int VMD::input(ifstream& s)
       frame.push_back(f);
     }
 
-    int skin_num;
-    readInt(s, skin_num);
-    cout << "skin_num: " << skin_num << endl;
-    skin.clear();
-    for (int i = 0; i < skin_num; i++) {
-      VMD_Skin tmp;
+    int morph_num;
+    readInt(s, morph_num);
+    cout << "morph_num: " << morph_num << endl;
+    morph.clear();
+    for (int i = 0; i < morph_num; i++) {
+      VMD_Morph tmp;
       tmp.read(s);
-      skin.push_back(tmp);
+      morph.push_back(tmp);
     }
 
     int camera_num;
@@ -184,7 +184,7 @@ void VMD_Frame::write(ofstream& s)
   }
 }
 
-void VMD_Skin::write(ofstream& s)
+void VMD_Morph::write(ofstream& s)
 {
   writeCharArray(s, name, name_len);
   writeUint32(s, frame);
@@ -245,9 +245,9 @@ int VMD::output(ofstream& s)
     frame[i].write(s);
   }
 
-  writeInt(s, skin.size());
-  for (size_t i = 0; i < skin.size(); i++) {
-    skin[i].write(s);
+  writeInt(s, morph.size());
+  for (size_t i = 0; i < morph.size(); i++) {
+    morph[i].write(s);
   }
 
   writeInt(s, camera.size());

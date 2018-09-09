@@ -61,7 +61,7 @@ Readfacevmd自体はMITライセンスです。詳しくは [LICENSE](LICENSE) �
 iBUG 300-W 等のデータセットは商用利用が禁止されています。
 OpenFaceが使用しているデータセットについては https://github.com/TadasBaltrusaitis/OpenFace/wiki/Datasets
 を参照してください。
-もしOpenFaceの商用ライセンスを入手したうえでデータセットの権利関係もクリアした場合は、この限りではありません。
+もし利用者がOpenFaceの商用ライセンスを入手したうえでデータセットの権利関係もクリアした場合は、この限りではありません。
 
 ## 参考文献
 

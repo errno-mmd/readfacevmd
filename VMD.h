@@ -29,13 +29,16 @@ public:
   char modelname[modelname_len];
 };
 
-// フレームデータの構造体
+// ボーンキーフレーム
 class VMD_Frame {
 public:
   VMD_Frame() : bonename(""), number(0), position(Vector3f::Zero()), rotation(Quaternionf::Identity()), interpolation{0} { }
   void read(ifstream& s);
   void write(ofstream& s);
-
+  bool operator<(const VMD_Frame& right) const {
+    return number < right.number;
+  }
+  
   static const int bonename_len = 15;
   static const int interpolation_len = 64;
   
@@ -46,12 +49,15 @@ public:
   uint8_t interpolation[interpolation_len];       // interpolation parameter
 };
 
-// Skin
-class VMD_Skin {
+// 表情キーフレーム
+class VMD_Morph {
 public:
-  VMD_Skin() : name(""), frame(0), weight(0) { }
+  VMD_Morph() : name(""), frame(0), weight(0) { }
   void read(ifstream& s);
   void write(ofstream& s);
+  bool operator<(const VMD_Morph& right) const {
+    return frame < right.frame;
+  }
 
   static const int name_len = 15;
   char name[name_len];
@@ -129,7 +135,7 @@ public:
 
 class VMD {
 public:
-  VMD() : header(), frame(0), skin(0), camera(0), light(0),
+  VMD() : header(), frame(0), morph(0), camera(0), light(0),
 	  self_shadow(0), show_ik(0) {}
   int input(ifstream& s);
   int output(ofstream& s);
@@ -137,7 +143,7 @@ public:
 
   VMD_Header header;
   vector<VMD_Frame> frame;
-  vector<VMD_Skin> skin;
+  vector<VMD_Morph> morph;
   vector<VMD_Camera> camera;
   vector<VMD_Light> light;
   vector<VMD_SelfShadow> self_shadow;

@@ -115,8 +115,8 @@ void add_gaze_pose(vector<VMD_Frame>& frame_vec, cv::Point3f gazedir_left, cv::P
   //  dumprot(rot_right, "rot_right");
 }
 
-// 表情フレームを VMD_Skin の vector に追加する 
-void add_skin_frame(vector<VMD_Skin>& skin_vec, string name, uint32_t frame_number, float weight)
+// 表情フレームを VMD_Morph の vector に追加する 
+void add_morph_frame(vector<VMD_Morph>& morph_vec, string name, uint32_t frame_number, float weight)
 {
   if (weight > 1.0) {
     weight = 1.0;
@@ -124,11 +124,11 @@ void add_skin_frame(vector<VMD_Skin>& skin_vec, string name, uint32_t frame_numb
   if (weight < 0.0) {
     weight = 0.0;
   }
-  VMD_Skin skin;
-  MMDFileIOUtil::utf8_to_sjis(name, skin.name, skin.name_len);
-  skin.frame = frame_number;
-  skin.weight = weight;
-  skin_vec.push_back(skin);
+  VMD_Morph morph;
+  MMDFileIOUtil::utf8_to_sjis(name, morph.name, morph.name_len);
+  morph.frame = frame_number;
+  morph.weight = weight;
+  morph_vec.push_back(morph);
 }
 
 // 顔の動きを表すAction Unitをface_analyserから取り出す
@@ -162,8 +162,8 @@ void get_action_unit(double* au, FaceAnalysis::FaceAnalyser face_analyser) {
   }
 }
 
-// 顔の表情を推定して skin_vec に追加する
-void estimate_facial_expression(vector<VMD_Skin>& skin_vec, double* au, uint32_t frame_number)
+// 顔の表情を推定して morph_vec に追加する
+void estimate_facial_expression(vector<VMD_Morph>& morph_vec, double* au, uint32_t frame_number)
 {
   // 口
   double mouth_a = au[AUID::JawDrop] * 2;
@@ -174,10 +174,10 @@ void estimate_facial_expression(vector<VMD_Skin>& skin_vec, double* au, uint32_t
   }
   double mouth_smile = au[AUID::LipCornerPuller];
 
-  add_skin_frame(skin_vec, u8"あ", frame_number, mouth_a);
-  add_skin_frame(skin_vec, u8"い", frame_number, mouth_i);
-  add_skin_frame(skin_vec, u8"う", frame_number, mouth_u);
-  add_skin_frame(skin_vec, u8"にやり", frame_number, mouth_smile);
+  add_morph_frame(morph_vec, u8"あ", frame_number, mouth_a);
+  add_morph_frame(morph_vec, u8"い", frame_number, mouth_i);
+  add_morph_frame(morph_vec, u8"う", frame_number, mouth_u);
+  add_morph_frame(morph_vec, u8"にやり", frame_number, mouth_smile);
 
   // 目
   double blink = au[AUID::LidTightener];
@@ -190,13 +190,13 @@ void estimate_facial_expression(vector<VMD_Skin>& skin_vec, double* au, uint32_t
     eye_smile = blink;
     blink = 0;
   }
-  add_skin_frame(skin_vec, u8"まばたき", frame_number, blink);
-  add_skin_frame(skin_vec, u8"笑い", frame_number, eye_smile);
+  add_morph_frame(morph_vec, u8"まばたき", frame_number, blink);
+  add_morph_frame(morph_vec, u8"笑い", frame_number, eye_smile);
 
   // 眉
-  add_skin_frame(skin_vec, u8"にこり", frame_number, au[AUID::InnerBrowRaiser]);
-  add_skin_frame(skin_vec, u8"怒り", frame_number, au[AUID::OuterBrowRaiser]);
-  add_skin_frame(skin_vec, u8"下", frame_number, au[AUID::BrowLowerer]);
+  add_morph_frame(morph_vec, u8"にこり", frame_number, au[AUID::InnerBrowRaiser]);
+  add_morph_frame(morph_vec, u8"怒り", frame_number, au[AUID::OuterBrowRaiser]);
+  add_morph_frame(morph_vec, u8"下", frame_number, au[AUID::BrowLowerer]);
 }
 
 void init_vmd_header(VMD_Header& h)
@@ -253,7 +253,7 @@ int estimate_face_vmd(char* image_file_name, char* vmd_file_name)
     face_analyser.PredictStaticAUsAndComputeFeatures(image, face_model.detected_landmarks);
     double action_unit[AU_SIZE];
     get_action_unit(action_unit, face_analyser);
-    estimate_facial_expression(vmd.skin, action_unit, frame_number);
+    estimate_facial_expression(vmd.morph, action_unit, frame_number);
 
     // 目の向きを推定する
     if (face_model.eye_model) {
