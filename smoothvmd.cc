@@ -75,7 +75,7 @@ void smooth_bone_frame(vector<VMD_Frame>& fv, float cutoff_freq)
     fv[i].position.y() = y[i];
   }
   vector<float> z;
-  for_each(fv.begin(), fv.end(), [&z](VMD_Frame f) { z.push_back(f.position.y()); });
+  for_each(fv.begin(), fv.end(), [&z](VMD_Frame f) { z.push_back(f.position.z()); });
   lowpass_filter(z, cutoff_freq);
   for (unsigned int i = 0; i < z.size(); i++) {
     fv[i].position.z() = z[i];
