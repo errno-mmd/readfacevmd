@@ -15,6 +15,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include "smooth_reduce.h"
 #include "MMDFileIOUtil.h"
 #include "VMD.h"
 
@@ -264,6 +265,13 @@ int estimate_face_vmd(char* image_file_name, char* vmd_file_name)
       add_gaze_pose(vmd.frame, gazedir_left, gazedir_right, rot_vmd, frame_number);
     }
   }
+
+  cout << "smoothing start" << endl;
+  float cutoff_freq = 5.0; // [Hz]
+  float threshold_pos = 0.5;
+  float threshold_rot = 3.0; // [degree]
+  float threshold_morph = 0.1; // 0～1
+  smooth_and_reduce(vmd, cutoff_freq, threshold_pos, threshold_rot, threshold_morph);
 
   cout << "VMD output start" << endl;
   // VMDファイルを書き出す

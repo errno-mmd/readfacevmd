@@ -32,7 +32,7 @@ link_directories(${TBB_LIBRARY_DIRS})
 pkg_check_modules(Eigen3 eigen3 REQUIRED)
 include_directories(${Eigen3_INCLUDE_DIRS})
 
-add_executable(readfacevmd readfacevmd.cc MMDFileIOUtil.cc VMD.cc)
+add_executable(readfacevmd readfacevmd.cc MMDFileIOUtil.cc VMD.cc smooth_reduce.cc smoothvmd.cc reducevmd.cc)
 target_link_libraries(readfacevmd LandmarkDetector)
 target_link_libraries(readfacevmd FaceAnalyser)
 target_link_libraries(readfacevmd GazeAnalyser)
