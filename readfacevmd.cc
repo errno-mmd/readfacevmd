@@ -91,6 +91,8 @@ void add_head_pose(vector<VMD_Frame>& frame_vec, const Quaterniond& rot, uint32_
 void add_gaze_pose(vector<VMD_Frame>& frame_vec, cv::Point3f gazedir_left, cv::Point3f gazedir_right,
 		   const Quaterniond& head_rot, uint32_t frame_number)
 {
+  // TODO: 目の回転補正(eye_rot_amp)の適切な値を決める
+  const double eye_rot_amp = 0.25;
   //  cout << "gazedir_left:" << gazedir_left << endl;
   //  cout << "gazedir_right:" << gazedir_right << endl;
   string bone_name = u8"両目";
@@ -110,7 +112,8 @@ void add_gaze_pose(vector<VMD_Frame>& frame_vec, cv::Point3f gazedir_left, cv::P
   rightdir.x() = gazedir_right.x;
   rightdir.y() = - gazedir_right.y;
   rightdir.z() = gazedir_right.z;
-  Quaterniond rot_right = Quaterniond::FromTwoVectors(front, rightdir);
+  Quaterniond rot_right = Quaterniond::FromTwoVectors(leftdir, rightdir);
+  rot_right = Quaterniond::Identity().slerp(eye_rot_amp, rot_right); // 回転量を補正
   add_rotation_pose(frame_vec, rot_right, frame_number, bone_name);
   //  cout << "rightdir:" << rightdir.x() << "," << rightdir.y() << "," << rightdir.z() << endl;
   //  dumprot(rot_right, "rot_right");
