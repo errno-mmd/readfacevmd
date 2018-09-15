@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{A437CDC2-0FD4-48EC-B872-CB13A0A9A519}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>..\OpenFace\lib\local\LandmarkDetector\include;..\OpenFace\lib\local\FaceAnalyser\include;..\OpenFace\lib\local\GazeAnalyser\include;..\OpenFace\lib\local\Utilities\include;C:\opt\eigen;C:\opt\icu4c\include;..\OpenFace\lib\3rdParty\OpenCV3.4\include\opencv;..\OpenFace\lib\3rdParty\OpenCV3.4\include;..\OpenFace\lib\3rdParty\OpenBLAS\include;..\OpenFace\lib\3rdParty\tbb\include;..\OpenFace\lib\3rdParty\dlib\include\dlib\..;..\OpenFace\lib\3rdParty\boost;..\OpenFace\lib\3rdParty\boost\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Full</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
+      <OpenMPSupport>false</OpenMPSupport>
+      <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalOptions>/source-charset:utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>icudt.lib;icuin.lib;icuio.lib;icutest.lib;icutu.lib;icuuc.lib;opencv_world340.lib;libopenblas.dll.a;tbb.lib;libboost_filesystem-vc140-mt-1_63.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;dlib.lib;FaceAnalyser.lib;GazeAnalyser.lib;LandmarkDetector.lib;Utilities.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\opt\x86\icu4c\lib;..\OpenFace\lib\3rdParty\OpenCV3.4\$(PlatformTarget)\v140\lib\$(Configuration);..\OpenFace\lib\3rdParty\tbb\lib\$(PlatformShortName)\v140;..\OpenFace\lib\3rdParty\boost\$(PlatformTarget)\v140\lib;..\OpenFace\lib\3rdParty\OpenCV3.4\$(PlatformTarget)\$(PlatformToolset)\lib\$(Configuration);..\OpenFace\lib\3rdParty\OpenBLAS\lib\$(PlatformShortName);..\OpenFace\lib\3rdParty\tbb\lib\$(PlatformShortName)\$(PlatformToolset);..\OpenFace\lib\3rdParty\boost\$(PlatformTarget)\$(PlatformToolset)\lib;..\OpenFace\lib\3rdParty\dlib\lib\x86\v140\Release;..\OpenFace\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\tbb\bin\x86\v140\tbb.dll" "$(OutDir)"
+</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\$(PlatformTarget)\$(PlatformToolset)\bin\$(Configuration)" "$(OutDir)"
+xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\bin\opencv_ffmpeg340.dll" "$(OutDir)"
+xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\bin\opencv_ffmpeg340_64.dll" "$(OutDir)"
+xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\classifiers" "$(OutDir)classifiers"
+xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\x86\v140\bin\Release\opencv_world340.dll" "$(OutDir)"
+xcopy /I /E /Y /D /C "C:\opt\x86\icu4c\bin\icudt62.dll" "$(OutDir)"
+xcopy /I /E /Y /D /C "C:\opt\x86\icu4c\bin\icuuc62.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenBlas\bin\$(PlatformShortName)" "$(OutDir)"
+</Command>
+    </PreLinkEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\OpenFace\lib\local\LandmarkDetector\include;..\OpenFace\lib\local\FaceAnalyser\include;..\OpenFace\lib\local\GazeAnalyser\include;..\OpenFace\lib\local\Utilities\include;C:\opt\eigen;C:\opt\icu4c\include;..\OpenFace\lib\3rdParty\OpenCV3.4\include\opencv;..\OpenFace\lib\3rdParty\OpenCV3.4\include;..\OpenFace\lib\3rdParty\OpenBLAS\include;..\OpenFace\lib\3rdParty\tbb\include;..\OpenFace\lib\3rdParty\dlib\include\dlib\..;..\OpenFace\lib\3rdParty\boost;..\OpenFace\lib\3rdParty\boost\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Full</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
+      <OpenMPSupport>false</OpenMPSupport>
+      <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
+      <AdditionalOptions>/source-charset:utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:\opt\icu4c\lib64;..\OpenFace\lib\3rdParty\OpenCV3.4\$(PlatformTarget)\v140\lib\$(Configuration);..\OpenFace\lib\3rdParty\tbb\lib\$(PlatformShortName)\v140;..\OpenFace\lib\3rdParty\boost\$(PlatformTarget)\v140\lib;..\OpenFace\lib\3rdParty\OpenCV3.4\$(PlatformTarget)\$(PlatformToolset)\lib\$(Configuration);..\OpenFace\lib\3rdParty\OpenBLAS\lib\$(PlatformShortName);..\OpenFace\lib\3rdParty\tbb\lib\$(PlatformShortName)\$(PlatformToolset);..\OpenFace\lib\3rdParty\boost\$(PlatformTarget)\$(PlatformToolset)\lib;..\OpenFace\lib\3rdParty\dlib\lib\x64\v140\Release;..\OpenFace\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>icudt.lib;icuin.lib;icuio.lib;icutest.lib;icutu.lib;icuuc.lib;opencv_world340.lib;libopenblas.dll.a;tbb.lib;libboost_filesystem-vc140-mt-1_63.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;dlib.lib;FaceAnalyser.lib;GazeAnalyser.lib;LandmarkDetector.lib;Utilities.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+    <PreLinkEvent>
+      <Command>xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenBlas\bin\$(PlatformShortName)" "$(OutDir)"</Command>
+    </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\$(PlatformTarget)\$(PlatformToolset)\bin\$(Configuration)" "$(OutDir)"
+xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\bin\opencv_ffmpeg340.dll" "$(OutDir)"
+xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\bin\opencv_ffmpeg340_64.dll" "$(OutDir)"
+xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\classifiers" "$(OutDir)classifiers"
+xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\x64\v140\bin\Release\opencv_world340.dll" "$(OutDir)"
+xcopy /I /E /Y /D /C "C:\opt\icu4c\bin64\icudt62.dll" "$(OutDir)"
+xcopy /I /E /Y /D /C "C:\opt\icu4c\bin64\icuuc62.dll" "$(OutDir)"
+</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\tbb\bin\x64\v140\tbb.dll" "$(OutDir)"
+</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="MMDFileIOUtil.cc" />
+    <ClCompile Include="readfacevmd.cc" />
+    <ClCompile Include="reducevmd.cc" />
+    <ClCompile Include="smoothvmd.cc" />
+    <ClCompile Include="smooth_reduce.cc" />
+    <ClCompile Include="VMD.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MMDFileIOUtil.h" />
+    <ClInclude Include="reducevmd.h" />
+    <ClInclude Include="smoothvmd.h" />
+    <ClInclude Include="smooth_reduce.h" />
+    <ClInclude Include="VMD.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

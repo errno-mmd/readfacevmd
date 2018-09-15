@@ -1,8 +1,12 @@
 /.backup/
 /.memo/
+/.vs/
+/archive/
 /build/
 /output/
+/Release/
 /test_*
+/x64/
 
 *~
 TAGS
