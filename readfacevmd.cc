@@ -79,12 +79,32 @@ void add_rotation_pose(vector<VMD_Frame>& frame_vec, const Quaterniond& rot, uin
     frame.rotation.z() = rot.z();
     frame_vec.push_back(frame);
 }
-  
+
+// 移動のキーフレームを VMD_Frame の vector に追加する
+void add_position_pose(vector<VMD_Frame>& frame_vec, const Vector3f& pos, uint32_t frame_number, string bone_name)
+{
+    VMD_Frame frame;
+    MMDFileIOUtil::utf8_to_sjis(bone_name, frame.bonename, frame.bonename_len);
+    frame.number = frame_number;
+    frame.position.x() = pos.x();
+    frame.position.y() = pos.y();
+    frame.position.z() = pos.z();
+    frame_vec.push_back(frame);
+}
+
 // 頭の向き(回転)のキーフレームを VMD_Frame の vector に格納する
 void add_head_pose(vector<VMD_Frame>& frame_vec, const Quaterniond& rot, uint32_t frame_number)
 {
   string bone_name = u8"頭";
   add_rotation_pose(frame_vec, rot, frame_number, bone_name);
+}
+
+// センターの位置のキーフレームを VMD_Frame の vector に格納する
+void add_center_frame(vector<VMD_Frame>& frame_vec, const Vector3f& pos, uint32_t frame_number)
+{
+  // string bone_name = u8"センター";
+  string bone_name = u8"全ての親";
+  add_position_pose(frame_vec, pos, frame_number, bone_name);
 }
 
 // 目の向き(回転)のキーフレームを VMD_Frame の vector に追加する
@@ -252,7 +272,10 @@ int estimate_face_vmd(char* image_file_name, char* vmd_file_name)
       * AngleAxisd(head_pose[4], Vector3d::UnitY())
       * AngleAxisd(- head_pose[5], Vector3d::UnitZ());
     add_head_pose(vmd.frame, rot_vmd, frame_number);
-    
+    Vector3f center_pos(head_pose[0], - head_pose[1], (head_pose[2] - 1000));
+    center_pos = center_pos * 12.5 / 1000 / 2; // 1m = 12.5ミクセル
+    add_center_frame(vmd.frame, center_pos, frame_number);
+
     // 表情を推定する
     face_analyser.PredictStaticAUsAndComputeFeatures(image, face_model.detected_landmarks);
     double action_unit[AU_SIZE];
@@ -271,7 +294,7 @@ int estimate_face_vmd(char* image_file_name, char* vmd_file_name)
 
   cout << "smoothing start" << endl;
   float cutoff_freq = 5.0; // [Hz]
-  float threshold_pos = 0.5;
+  float threshold_pos = 0.2;
   float threshold_rot = 3.0; // [degree]
   float threshold_morph = 0.1; // 0～1
   smooth_and_reduce(vmd, cutoff_freq, threshold_pos, threshold_rot, threshold_morph);
