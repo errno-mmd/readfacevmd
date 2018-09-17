@@ -22,17 +22,11 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
+#define RFV_DLL_EXPORT
+#include "readfacevmd.h"
+
 using namespace std;
 using namespace Eigen;
-
-void usage(char *prog)
-{
-  cerr << "usage: " << prog << " IMAGE_FILE VMD_FILE" << endl;
-  cerr << endl;
-  cerr << "Readfacevmd reads IMAGE_FILE, recognize facial expressions," << endl;
-  cerr << "then writes the motion data to VMD_FILE." << endl;
-  cerr << "IMAGE_FILE may be a photo image file or a movie file." << endl;
-}
 
 const int LANDMARK_NUM = 68;
 
@@ -232,7 +226,8 @@ void init_vmd_header(VMD_Header& h)
 }
 
 // image_file_name で指定された画像/動画ファイルから表情を推定して vmd_file_name に出力する
-int estimate_face_vmd(char* image_file_name, char* vmd_file_name)
+RFV_DLL_DECL int read_face_vmd(const char* image_file_name, const char* vmd_file_name, float cutoff_freq,
+			       float threshold_pos, float threshold_rot, float threshold_morph)
 {
   vector<string> arg_str;
   arg_str.push_back("-f");
@@ -292,31 +287,21 @@ int estimate_face_vmd(char* image_file_name, char* vmd_file_name)
     }
   }
 
-  cout << "smoothing start" << endl;
-  float cutoff_freq = 5.0; // [Hz]
-  float threshold_pos = 0.2;
-  float threshold_rot = 3.0; // [degree]
-  float threshold_morph = 0.1; // 0～1
+  cout << "smoothing & reduction start" << endl;
+  cout << "cutoff frequency: " << cutoff_freq << endl;
+  cout << "position threshold: " << threshold_pos << endl;
+  cout << "rotation threshold: " << threshold_rot << endl;
+  cout << "morph threshold: " << threshold_morph << endl;
   smooth_and_reduce(vmd, cutoff_freq, threshold_pos, threshold_rot, threshold_morph);
+  cout << "smoothing & reduction end" << endl;
 
   cout << "VMD output start" << endl;
+  cout << "output filename: " << vmd_file_name << endl;
   // VMDファイルを書き出す
   ofstream out(vmd_file_name, ios::binary);
   vmd.output(out);
   out.close();
   cout << "VMD output end" << endl;
-  return 0;
-}
-
-int main(int argc, char* argv[])
-{
-  if (argc < 3) {
-    usage(argv[0]);
-    return 1;
-  }
-
-  estimate_face_vmd(argv[1], argv[2]);
-  
   return 0;
 }
 

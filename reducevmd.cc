@@ -10,6 +10,11 @@
 
 vector<VMD_Frame> reduce_bone_frame(const vector<VMD_Frame>& v, int head, int tail, float threshold_pos, float threshold_rot)
 {
+  if (threshold_pos < 0 || threshold_rot < 0) {
+    vector<VMD_Frame> v1(v);
+    return v1;
+  }
+
   float max_pos_err = 0.0;
   float max_rot_err = 0.0;
   int max_idx_pos = 0;
@@ -51,6 +56,11 @@ vector<VMD_Frame> reduce_bone_frame(const vector<VMD_Frame>& v, int head, int ta
 
 vector<VMD_Morph> reduce_morph_frame(const vector<VMD_Morph>& v, int head, int tail, float threshold)
 {
+  if (threshold < 0) {
+    vector<VMD_Morph> v1(v);
+    return v1;
+  }
+
   float max = 0.0;
   int max_idx = 0;
   int total = tail - head;

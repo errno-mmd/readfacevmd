@@ -57,6 +57,9 @@ void lowpass_filter(vector<float>& v, float cutoff_freq)
 
 void smooth_bone_frame(vector<VMD_Frame>& fv, float cutoff_freq)
 {
+  if (cutoff_freq < 0)
+    return;
+
   sort(fv.begin(), fv.end());
   // uint32_t first_frame_num = fv.front().number;
   // uint32_t last_frame_num = fv.back().number;
@@ -126,6 +129,9 @@ void smooth_bone_frame(vector<VMD_Frame>& fv, float cutoff_freq)
 
 void smooth_morph_frame(vector<VMD_Morph>& mv, float cutoff_freq)
 {
+  if (cutoff_freq < 0)
+    return;
+  
   sort(mv.begin(), mv.end());
   // uint32_t first_frame_num = mv.front().frame;
   // uint32_t last_frame_num = mv.back().frame;

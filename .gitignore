@@ -7,6 +7,8 @@
 /Release/
 /test_*
 /x64/
+/rfv_gui/obj/
+/rfv_gui/bin/
 
 *~
 TAGS
