@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="filter_vmd_file" xml:space="preserve">
-    <value>VMD file (*.vmd)|*.vmd</value>
+    <value>VMDファイル(*.vmd)|*.vmd</value>
   </data>
   <data name="msg_finished" xml:space="preserve">
-    <value>Finished</value>
+    <value>終了</value>
   </data>
   <data name="title_output_file" xml:space="preserve">
-    <value>Output VMD file</value>
+    <value>出力先VMDファイル名</value>
   </data>
   <data name="title_select_input_file" xml:space="preserve">
-    <value>Select input file (movie or photo)</value>
+    <value>入力ファイル選択(動画または画像ファイル)</value>
   </data>
 </root>

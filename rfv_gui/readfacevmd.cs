@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using rfv_gui.Properties;
 
 namespace rfv_gui
 {
@@ -21,7 +22,7 @@ namespace rfv_gui
         private void input_file_button_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Title = "入力ファイル選択(動画または画像ファイル)";
+            dialog.Title = Resources.title_select_input_file;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 text_input_file.Text = dialog.FileName;
@@ -34,8 +35,8 @@ namespace rfv_gui
         private void run_button_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Title = "出力先VMDファイル名";
-            dialog.Filter = "VMDファイル(*.vmd)|*.vmd";
+            dialog.Title = Resources.title_output_file;
+            dialog.Filter = Resources.filter_vmd_file;
             dialog.FilterIndex = 1;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -102,7 +103,7 @@ namespace rfv_gui
 
         private void process_exited(object sender, EventArgs e)
         {
-            MessageBox.Show("終了");
+            MessageBox.Show(Resources.msg_finished);
             this.Invoke(new Action(() =>
             {
                 button_input_file.Enabled = true;
