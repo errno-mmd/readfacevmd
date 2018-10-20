@@ -68,7 +68,7 @@ namespace rfv_gui
                 {
                     cmd_arg += " --th_pos -1 --th_rot -1 --th_morph -1";
                 }
-                cmd_arg += " " + image_file_name + " " + vmd_file_name;
+                cmd_arg += " \"" + image_file_name + "\" \"" + vmd_file_name + "\"";
 
                 var proc = new System.Diagnostics.Process();
                 var current_dir = Environment.CurrentDirectory;
