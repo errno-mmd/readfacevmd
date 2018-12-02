@@ -69,6 +69,10 @@ namespace rfv_gui
                 {
                     cmd_arg += " --th_pos -1 --th_rot -1 --th_morph -1";
                 }
+                if (! String.IsNullOrWhiteSpace(text_nameconf_file.Text))
+                {
+                    cmd_arg += " --nameconf " + text_nameconf_file.Text;
+                }
                 cmd_arg += " \"" + image_file_name + "\" \"" + vmd_file_name + "\"";
 
                 var proc = new System.Diagnostics.Process();
@@ -136,6 +140,21 @@ namespace rfv_gui
                 text_th_pos.Enabled = false;
                 text_th_rot.Enabled = false;
                 text_th_morph.Enabled = false;
+            }
+        }
+
+        private void group_morphname_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button_nameconf_file_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = Resources.title_select_nameconf_file;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                text_nameconf_file.Text = dialog.FileName;
             }
         }
     }

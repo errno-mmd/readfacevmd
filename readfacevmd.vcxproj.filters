@@ -36,6 +36,9 @@
     <ClCompile Include="readfacevmd_main.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="morph_name.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MMDFileIOUtil.h">

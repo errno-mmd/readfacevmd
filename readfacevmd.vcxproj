@@ -188,6 +188,7 @@ xcopy /I /E /Y /D /C "C:\opt\icu4c\bin64\icuuc62.dll" "$(OutDir)"
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="MMDFileIOUtil.cc" />
+    <ClCompile Include="morph_name.cc" />
     <ClCompile Include="readfacevmd.cc" />
     <ClCompile Include="readfacevmd_main.cc" />
     <ClCompile Include="reducevmd.cc" />

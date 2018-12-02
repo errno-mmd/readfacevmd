@@ -46,8 +46,13 @@
             this.text_th_rot = new System.Windows.Forms.TextBox();
             this.text_th_pos = new System.Windows.Forms.TextBox();
             this.check_reduction = new System.Windows.Forms.CheckBox();
+            this.text_nameconf_file = new System.Windows.Forms.TextBox();
+            this.label_nameconf_file = new System.Windows.Forms.Label();
+            this.button_nameconf_file = new System.Windows.Forms.Button();
+            this.group_morphname = new System.Windows.Forms.GroupBox();
             this.group_smoothing.SuspendLayout();
             this.group_reduction.SuspendLayout();
+            this.group_morphname.SuspendLayout();
             this.SuspendLayout();
             // 
             // label_input_file
@@ -82,10 +87,10 @@
             // 
             // group_smoothing
             // 
-            resources.ApplyResources(this.group_smoothing, "group_smoothing");
             this.group_smoothing.Controls.Add(this.label_cutoff);
             this.group_smoothing.Controls.Add(this.text_cutoff);
             this.group_smoothing.Controls.Add(this.check_smoothing);
+            resources.ApplyResources(this.group_smoothing, "group_smoothing");
             this.group_smoothing.Name = "group_smoothing";
             this.group_smoothing.TabStop = false;
             // 
@@ -110,7 +115,6 @@
             // 
             // group_reduction
             // 
-            resources.ApplyResources(this.group_reduction, "group_reduction");
             this.group_reduction.Controls.Add(this.label_th_morph);
             this.group_reduction.Controls.Add(this.label_th_rot);
             this.group_reduction.Controls.Add(this.label_th_pos);
@@ -118,6 +122,7 @@
             this.group_reduction.Controls.Add(this.text_th_rot);
             this.group_reduction.Controls.Add(this.text_th_pos);
             this.group_reduction.Controls.Add(this.check_reduction);
+            resources.ApplyResources(this.group_reduction, "group_reduction");
             this.group_reduction.Name = "group_reduction";
             this.group_reduction.TabStop = false;
             // 
@@ -160,11 +165,39 @@
             this.check_reduction.UseVisualStyleBackColor = true;
             this.check_reduction.CheckedChanged += new System.EventHandler(this.check_reduction_CheckedChanged);
             // 
+            // text_nameconf_file
+            // 
+            resources.ApplyResources(this.text_nameconf_file, "text_nameconf_file");
+            this.text_nameconf_file.Name = "text_nameconf_file";
+            // 
+            // label_nameconf_file
+            // 
+            resources.ApplyResources(this.label_nameconf_file, "label_nameconf_file");
+            this.label_nameconf_file.Name = "label_nameconf_file";
+            // 
+            // button_nameconf_file
+            // 
+            resources.ApplyResources(this.button_nameconf_file, "button_nameconf_file");
+            this.button_nameconf_file.Name = "button_nameconf_file";
+            this.button_nameconf_file.UseVisualStyleBackColor = true;
+            this.button_nameconf_file.Click += new System.EventHandler(this.button_nameconf_file_Click);
+            // 
+            // group_morphname
+            // 
+            this.group_morphname.Controls.Add(this.button_nameconf_file);
+            this.group_morphname.Controls.Add(this.label_nameconf_file);
+            this.group_morphname.Controls.Add(this.text_nameconf_file);
+            resources.ApplyResources(this.group_morphname, "group_morphname");
+            this.group_morphname.Name = "group_morphname";
+            this.group_morphname.TabStop = false;
+            this.group_morphname.Enter += new System.EventHandler(this.group_morphname_Enter);
+            // 
             // readfacevmd
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.group_reduction);
+            this.Controls.Add(this.group_morphname);
             this.Controls.Add(this.group_smoothing);
             this.Controls.Add(this.console_message);
             this.Controls.Add(this.button_run);
@@ -176,6 +209,8 @@
             this.group_smoothing.PerformLayout();
             this.group_reduction.ResumeLayout(false);
             this.group_reduction.PerformLayout();
+            this.group_morphname.ResumeLayout(false);
+            this.group_morphname.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,6 +235,10 @@
         private System.Windows.Forms.TextBox text_th_rot;
         private System.Windows.Forms.TextBox text_th_pos;
         private System.Windows.Forms.CheckBox check_reduction;
+        private System.Windows.Forms.TextBox text_nameconf_file;
+        private System.Windows.Forms.Label label_nameconf_file;
+        private System.Windows.Forms.Button button_nameconf_file;
+        private System.Windows.Forms.GroupBox group_morphname;
     }
 }
 

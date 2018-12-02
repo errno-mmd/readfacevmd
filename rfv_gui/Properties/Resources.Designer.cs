@@ -95,5 +95,14 @@ namespace rfv_gui.Properties {
                 return ResourceManager.GetString("title_select_input_file", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Select morph / bone name config file に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string title_select_nameconf_file {
+            get {
+                return ResourceManager.GetString("title_select_nameconf_file", resourceCulture);
+            }
+        }
     }
 }

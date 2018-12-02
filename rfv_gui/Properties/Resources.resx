@@ -129,4 +129,7 @@
   <data name="title_select_input_file" xml:space="preserve">
     <value>Select input file (movie or photo)</value>
   </data>
+  <data name="title_select_nameconf_file" xml:space="preserve">
+    <value>Select morph / bone name config file</value>
+  </data>
 </root>

@@ -172,4 +172,13 @@
   <data name="check_reduction.Text" xml:space="preserve">
     <value>キーフレームを間引く</value>
   </data>
+  <data name="button_nameconf_file.Text" xml:space="preserve">
+    <value>参照</value>
+  </data>
+  <data name="group_morphname.Text" xml:space="preserve">
+    <value>モーフ/ボーン名オプション</value>
+  </data>
+  <data name="label_nameconf_file.Text" xml:space="preserve">
+    <value>設定ファイル</value>
+  </data>
 </root>

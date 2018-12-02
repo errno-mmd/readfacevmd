@@ -117,49 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;text_th_morph.Parent" xml:space="preserve">
-    <value>group_reduction</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label_input_file.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="button_run.Location" type="System.Drawing.Point, System.Drawing">
-    <value>445, 60</value>
+  <data name="label_input_file.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 19</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label_th_morph.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="label_input_file.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 12</value>
   </data>
-  <data name="&gt;&gt;text_th_pos.Parent" xml:space="preserve">
-    <value>group_reduction</value>
+  <data name="label_input_file.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;group_reduction.Name" xml:space="preserve">
-    <value>group_reduction</value>
+  <data name="label_input_file.Text" xml:space="preserve">
+    <value>Input file :</value>
   </data>
-  <data name="&gt;&gt;text_th_pos.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;label_input_file.Name" xml:space="preserve">
+    <value>label_input_file</value>
   </data>
-  <data name="group_smoothing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 119</value>
+  <data name="&gt;&gt;label_input_file.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;text_cutoff.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;label_input_file.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;label_input_file.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="text_input_file.Location" type="System.Drawing.Point, System.Drawing">
+    <value>82, 16</value>
+  </data>
+  <data name="text_input_file.Size" type="System.Drawing.Size, System.Drawing">
+    <value>404, 19</value>
+  </data>
+  <data name="text_input_file.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;text_input_file.Name" xml:space="preserve">
+    <value>text_input_file</value>
+  </data>
+  <data name="&gt;&gt;text_input_file.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;text_input_file.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;text_input_file.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="button_run.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 45</value>
+  <data name="button_input_file.Location" type="System.Drawing.Point, System.Drawing">
+    <value>492, 11</value>
   </data>
-  <data name="text_th_morph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 19</value>
+  <data name="button_input_file.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 29</value>
   </data>
-  <data name="&gt;&gt;button_run.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="button_input_file.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="label_th_rot.Text" xml:space="preserve">
-    <value>Rotation error threshold</value>
-  </data>
-  <data name="group_smoothing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 54</value>
+  <data name="button_input_file.Text" xml:space="preserve">
+    <value>Browse</value>
   </data>
   <data name="&gt;&gt;button_input_file.Name" xml:space="preserve">
     <value>button_input_file</value>
@@ -167,404 +185,488 @@
   <data name="&gt;&gt;button_input_file.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;text_th_morph.Name" xml:space="preserve">
-    <value>text_th_morph</value>
-  </data>
-  <data name="text_cutoff.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 44</value>
-  </data>
-  <data name="&gt;&gt;check_reduction.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;label_cutoff.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label_input_file.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;check_reduction.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label_th_morph.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label_cutoff.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>readfacevmd</value>
-  </data>
-  <data name="&gt;&gt;group_reduction.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label_th_pos.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 12</value>
-  </data>
-  <data name="&gt;&gt;text_input_file.Parent" xml:space="preserve">
+  <data name="&gt;&gt;button_input_file.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="text_th_rot.Text" xml:space="preserve">
-    <value>3.0</value>
+  <data name="&gt;&gt;button_input_file.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
-  <data name="console_message.Size" type="System.Drawing.Size, System.Drawing">
-    <value>548, 199</value>
+  <data name="button_run.Location" type="System.Drawing.Point, System.Drawing">
+    <value>445, 60</value>
   </data>
-  <data name="&gt;&gt;console_message.Name" xml:space="preserve">
-    <value>console_message</value>
-  </data>
-  <data name="&gt;&gt;text_th_pos.Name" xml:space="preserve">
-    <value>text_th_pos</value>
+  <data name="button_run.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 45</value>
   </data>
   <data name="button_run.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
+  </data>
+  <data name="button_run.Text" xml:space="preserve">
+    <value>Generate VMD</value>
+  </data>
+  <data name="&gt;&gt;button_run.Name" xml:space="preserve">
+    <value>button_run</value>
+  </data>
+  <data name="&gt;&gt;button_run.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button_run.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;button_run.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="console_message.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 240</value>
+  </data>
+  <data name="console_message.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="console_message.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Vertical</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 12</value>
+  <data name="console_message.Size" type="System.Drawing.Size, System.Drawing">
+    <value>548, 199</value>
   </data>
-  <data name="label_th_rot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 12</value>
+  <data name="console_message.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="&gt;&gt;check_smoothing.Name" xml:space="preserve">
-    <value>check_smoothing</value>
+  <data name="&gt;&gt;console_message.Name" xml:space="preserve">
+    <value>console_message</value>
   </data>
-  <data name="label_th_pos.Text" xml:space="preserve">
-    <value>Position error threshold</value>
+  <data name="&gt;&gt;console_message.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="text_th_morph.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;console_message.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;console_message.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label_cutoff.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label_cutoff.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 47</value>
+  </data>
+  <data name="label_cutoff.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 12</value>
+  </data>
+  <data name="label_cutoff.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label_cutoff.Text" xml:space="preserve">
+    <value>Cutoff frequency [Hz]</value>
+  </data>
+  <data name="&gt;&gt;label_cutoff.Name" xml:space="preserve">
+    <value>label_cutoff</value>
+  </data>
+  <data name="&gt;&gt;label_cutoff.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_cutoff.Parent" xml:space="preserve">
+    <value>group_smoothing</value>
+  </data>
+  <data name="&gt;&gt;label_cutoff.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="text_cutoff.Location" type="System.Drawing.Point, System.Drawing">
+    <value>132, 44</value>
+  </data>
+  <data name="text_cutoff.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 19</value>
+  </data>
+  <data name="text_cutoff.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="text_cutoff.Text" xml:space="preserve">
     <value>5.0</value>
   </data>
-  <data name="&gt;&gt;text_th_rot.Name" xml:space="preserve">
-    <value>text_th_rot</value>
-  </data>
-  <data name="group_smoothing.Text" xml:space="preserve">
-    <value>Smoothing options</value>
-  </data>
-  <data name="&gt;&gt;label_input_file.Name" xml:space="preserve">
-    <value>label_input_file</value>
-  </data>
-  <data name="label_input_file.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 12</value>
-  </data>
-  <data name="button_run.Text" xml:space="preserve">
-    <value>Generate VMD</value>
-  </data>
-  <data name="label_cutoff.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;text_input_file.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="check_smoothing.Text" xml:space="preserve">
-    <value>Enable smoothing</value>
-  </data>
-  <data name="text_th_morph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 90</value>
-  </data>
-  <data name="&gt;&gt;text_th_pos.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="label_cutoff.Text" xml:space="preserve">
-    <value>Cutoff frequency [Hz]</value>
-  </data>
-  <data name="group_reduction.Text" xml:space="preserve">
-    <value>Keyframe reduction options</value>
-  </data>
-  <data name="label_th_morph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 12</value>
-  </data>
-  <data name="&gt;&gt;check_reduction.Parent" xml:space="preserve">
-    <value>group_reduction</value>
-  </data>
-  <data name="&gt;&gt;group_smoothing.Name" xml:space="preserve">
-    <value>group_smoothing</value>
-  </data>
-  <data name="group_smoothing.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;button_run.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>readfacevmd</value>
-  </data>
-  <data name="label_th_rot.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label_input_file.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 19</value>
-  </data>
-  <data name="check_reduction.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;text_cutoff.Name" xml:space="preserve">
+    <value>text_cutoff</value>
   </data>
   <data name="&gt;&gt;text_cutoff.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;group_reduction.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="label_cutoff.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 47</value>
-  </data>
-  <data name="text_cutoff.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;console_message.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="group_reduction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>217, 54</value>
-  </data>
-  <data name="&gt;&gt;label_th_pos.Parent" xml:space="preserve">
-    <value>group_reduction</value>
-  </data>
-  <data name="&gt;&gt;text_th_rot.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;button_run.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;check_smoothing.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="text_th_pos.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 19</value>
-  </data>
-  <data name="label_cutoff.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 12</value>
-  </data>
-  <data name="&gt;&gt;label_th_pos.Name" xml:space="preserve">
-    <value>label_th_pos</value>
-  </data>
-  <data name="&gt;&gt;button_input_file.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;button_run.Name" xml:space="preserve">
-    <value>button_run</value>
-  </data>
-  <data name="check_reduction.Text" xml:space="preserve">
-    <value>Enable keyframe reduction</value>
-  </data>
-  <data name="&gt;&gt;label_th_morph.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;button_input_file.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="check_reduction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 21</value>
-  </data>
-  <data name="&gt;&gt;label_cutoff.Parent" xml:space="preserve">
-    <value>group_smoothing</value>
-  </data>
-  <data name="&gt;&gt;label_cutoff.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="group_reduction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 119</value>
-  </data>
-  <data name="&gt;&gt;label_input_file.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label_th_rot.Parent" xml:space="preserve">
-    <value>group_reduction</value>
-  </data>
-  <data name="&gt;&gt;label_cutoff.Name" xml:space="preserve">
-    <value>label_cutoff</value>
-  </data>
-  <data name="text_th_rot.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="console_message.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 179</value>
-  </data>
-  <data name="check_reduction.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label_th_pos.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 47</value>
-  </data>
-  <data name="label_input_file.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="text_th_rot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 67</value>
-  </data>
-  <data name="&gt;&gt;group_smoothing.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="button_input_file.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;text_th_morph.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;check_smoothing.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="check_smoothing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 16</value>
-  </data>
-  <data name="&gt;&gt;text_cutoff.Name" xml:space="preserve">
-    <value>text_cutoff</value>
-  </data>
-  <data name="label_th_pos.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="text_input_file.Size" type="System.Drawing.Size, System.Drawing">
-    <value>404, 19</value>
-  </data>
-  <data name="label_th_morph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 93</value>
-  </data>
-  <data name="&gt;&gt;label_th_rot.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;text_cutoff.Parent" xml:space="preserve">
     <value>group_smoothing</value>
   </data>
-  <data name="&gt;&gt;text_th_rot.Parent" xml:space="preserve">
-    <value>group_reduction</value>
-  </data>
-  <data name="group_reduction.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;label_th_rot.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;text_cutoff.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="check_smoothing.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;check_reduction.Name" xml:space="preserve">
-    <value>check_reduction</value>
+  <data name="check_smoothing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 21</value>
   </data>
-  <data name="text_th_pos.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 44</value>
-  </data>
-  <data name="console_message.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="button_input_file.Location" type="System.Drawing.Point, System.Drawing">
-    <value>492, 11</value>
-  </data>
-  <data name="&gt;&gt;text_th_morph.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="label_th_morph.Text" xml:space="preserve">
-    <value>Morph error threshold</value>
-  </data>
-  <data name="label_th_pos.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;label_th_rot.Name" xml:space="preserve">
-    <value>label_th_rot</value>
-  </data>
-  <data name="&gt;&gt;text_input_file.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="label_input_file.Text" xml:space="preserve">
-    <value>Input file :</value>
-  </data>
-  <data name="&gt;&gt;label_th_morph.Name" xml:space="preserve">
-    <value>label_th_morph</value>
-  </data>
-  <data name="&gt;&gt;group_smoothing.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;console_message.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;check_smoothing.Parent" xml:space="preserve">
-    <value>group_smoothing</value>
-  </data>
-  <data name="label_th_morph.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="check_smoothing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 16</value>
   </data>
   <data name="check_smoothing.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="check_smoothing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 21</value>
+  <data name="check_smoothing.Text" xml:space="preserve">
+    <value>Enable smoothing</value>
   </data>
-  <data name="&gt;&gt;label_th_morph.Parent" xml:space="preserve">
-    <value>group_reduction</value>
+  <data name="&gt;&gt;check_smoothing.Name" xml:space="preserve">
+    <value>check_smoothing</value>
+  </data>
+  <data name="&gt;&gt;check_smoothing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;check_smoothing.Parent" xml:space="preserve">
+    <value>group_smoothing</value>
+  </data>
+  <data name="&gt;&gt;check_smoothing.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="group_smoothing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 54</value>
+  </data>
+  <data name="group_smoothing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 119</value>
+  </data>
+  <data name="group_smoothing.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="group_smoothing.Text" xml:space="preserve">
+    <value>Smoothing options</value>
+  </data>
+  <data name="&gt;&gt;group_smoothing.Name" xml:space="preserve">
+    <value>group_smoothing</value>
+  </data>
+  <data name="&gt;&gt;group_smoothing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;group_smoothing.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>563, 384</value>
-  </data>
-  <data name="&gt;&gt;text_input_file.Name" xml:space="preserve">
-    <value>text_input_file</value>
-  </data>
-  <data name="text_cutoff.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 19</value>
-  </data>
-  <data name="&gt;&gt;group_reduction.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="check_reduction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 16</value>
-  </data>
-  <data name="label_th_rot.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;group_smoothing.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;label_th_pos.Type" xml:space="preserve">
+  <data name="label_th_morph.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label_th_morph.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 93</value>
+  </data>
+  <data name="label_th_morph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 12</value>
+  </data>
+  <data name="label_th_morph.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label_th_morph.Text" xml:space="preserve">
+    <value>Morph error threshold</value>
+  </data>
+  <data name="&gt;&gt;label_th_morph.Name" xml:space="preserve">
+    <value>label_th_morph</value>
+  </data>
+  <data name="&gt;&gt;label_th_morph.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="button_input_file.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 29</value>
+  <data name="&gt;&gt;label_th_morph.Parent" xml:space="preserve">
+    <value>group_reduction</value>
   </data>
-  <data name="text_th_morph.Text" xml:space="preserve">
-    <value>0.1</value>
+  <data name="&gt;&gt;label_th_morph.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;text_th_rot.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="button_input_file.Text" xml:space="preserve">
-    <value>Browse</value>
-  </data>
-  <data name="text_th_pos.Text" xml:space="preserve">
-    <value>0.2</value>
-  </data>
-  <data name="&gt;&gt;console_message.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="text_input_file.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 16</value>
-  </data>
-  <data name="&gt;&gt;label_input_file.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="console_message.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;label_th_pos.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="label_th_rot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="label_th_rot.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 70</value>
   </data>
+  <data name="label_th_rot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 12</value>
+  </data>
+  <data name="label_th_rot.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label_th_rot.Text" xml:space="preserve">
+    <value>Rotation error threshold</value>
+  </data>
+  <data name="&gt;&gt;label_th_rot.Name" xml:space="preserve">
+    <value>label_th_rot</value>
+  </data>
+  <data name="&gt;&gt;label_th_rot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_th_rot.Parent" xml:space="preserve">
+    <value>group_reduction</value>
+  </data>
+  <data name="&gt;&gt;label_th_rot.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label_th_pos.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label_th_pos.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 47</value>
+  </data>
+  <data name="label_th_pos.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 12</value>
+  </data>
+  <data name="label_th_pos.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label_th_pos.Text" xml:space="preserve">
+    <value>Position error threshold</value>
+  </data>
+  <data name="&gt;&gt;label_th_pos.Name" xml:space="preserve">
+    <value>label_th_pos</value>
+  </data>
+  <data name="&gt;&gt;label_th_pos.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_th_pos.Parent" xml:space="preserve">
+    <value>group_reduction</value>
+  </data>
+  <data name="&gt;&gt;label_th_pos.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="text_th_morph.Location" type="System.Drawing.Point, System.Drawing">
+    <value>152, 90</value>
+  </data>
+  <data name="text_th_morph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 19</value>
+  </data>
+  <data name="text_th_morph.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="text_th_morph.Text" xml:space="preserve">
+    <value>0.1</value>
+  </data>
+  <data name="&gt;&gt;text_th_morph.Name" xml:space="preserve">
+    <value>text_th_morph</value>
+  </data>
+  <data name="&gt;&gt;text_th_morph.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;text_th_morph.Parent" xml:space="preserve">
+    <value>group_reduction</value>
+  </data>
+  <data name="&gt;&gt;text_th_morph.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="text_th_rot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>152, 67</value>
+  </data>
   <data name="text_th_rot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 19</value>
+  </data>
+  <data name="text_th_rot.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="text_th_rot.Text" xml:space="preserve">
+    <value>3.0</value>
+  </data>
+  <data name="&gt;&gt;text_th_rot.Name" xml:space="preserve">
+    <value>text_th_rot</value>
+  </data>
+  <data name="&gt;&gt;text_th_rot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;text_th_rot.Parent" xml:space="preserve">
+    <value>group_reduction</value>
+  </data>
+  <data name="&gt;&gt;text_th_rot.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="text_th_pos.Location" type="System.Drawing.Point, System.Drawing">
+    <value>152, 44</value>
+  </data>
+  <data name="text_th_pos.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 19</value>
   </data>
   <data name="text_th_pos.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="text_input_file.TabIndex" type="System.Int32, mscorlib">
+  <data name="text_th_pos.Text" xml:space="preserve">
+    <value>0.2</value>
+  </data>
+  <data name="&gt;&gt;text_th_pos.Name" xml:space="preserve">
+    <value>text_th_pos</value>
+  </data>
+  <data name="&gt;&gt;text_th_pos.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;text_th_pos.Parent" xml:space="preserve">
+    <value>group_reduction</value>
+  </data>
+  <data name="&gt;&gt;text_th_pos.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="check_reduction.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="check_reduction.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 21</value>
+  </data>
+  <data name="check_reduction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 16</value>
+  </data>
+  <data name="check_reduction.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="check_reduction.Text" xml:space="preserve">
+    <value>Enable keyframe reduction</value>
+  </data>
+  <data name="&gt;&gt;check_reduction.Name" xml:space="preserve">
+    <value>check_reduction</value>
+  </data>
+  <data name="&gt;&gt;check_reduction.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;check_reduction.Parent" xml:space="preserve">
+    <value>group_reduction</value>
+  </data>
+  <data name="&gt;&gt;check_reduction.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="group_reduction.Location" type="System.Drawing.Point, System.Drawing">
+    <value>217, 54</value>
+  </data>
+  <data name="group_reduction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 119</value>
+  </data>
+  <data name="group_reduction.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="group_reduction.Text" xml:space="preserve">
+    <value>Keyframe reduction options</value>
+  </data>
+  <data name="&gt;&gt;group_reduction.Name" xml:space="preserve">
+    <value>group_reduction</value>
+  </data>
+  <data name="&gt;&gt;group_reduction.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;group_reduction.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;group_reduction.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="text_nameconf_file.Location" type="System.Drawing.Point, System.Drawing">
+    <value>106, 22</value>
+  </data>
+  <data name="text_nameconf_file.Size" type="System.Drawing.Size, System.Drawing">
+    <value>368, 19</value>
+  </data>
+  <data name="text_nameconf_file.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;text_nameconf_file.Name" xml:space="preserve">
+    <value>text_nameconf_file</value>
+  </data>
+  <data name="&gt;&gt;text_nameconf_file.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;text_nameconf_file.Parent" xml:space="preserve">
+    <value>group_morphname</value>
+  </data>
+  <data name="&gt;&gt;text_nameconf_file.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label_nameconf_file.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label_nameconf_file.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label_nameconf_file.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 25</value>
+  </data>
+  <data name="label_nameconf_file.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 12</value>
+  </data>
+  <data name="label_nameconf_file.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label_nameconf_file.Text" xml:space="preserve">
+    <value>name config file :</value>
+  </data>
+  <data name="&gt;&gt;label_nameconf_file.Name" xml:space="preserve">
+    <value>label_nameconf_file</value>
+  </data>
+  <data name="&gt;&gt;label_nameconf_file.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_nameconf_file.Parent" xml:space="preserve">
+    <value>group_morphname</value>
+  </data>
+  <data name="&gt;&gt;label_nameconf_file.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="button_nameconf_file.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="button_nameconf_file.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 16</value>
+  </data>
+  <data name="button_nameconf_file.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 31</value>
+  </data>
+  <data name="button_nameconf_file.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="button_nameconf_file.Text" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="&gt;&gt;button_nameconf_file.Name" xml:space="preserve">
+    <value>button_nameconf_file</value>
+  </data>
+  <data name="&gt;&gt;button_nameconf_file.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button_nameconf_file.Parent" xml:space="preserve">
+    <value>group_morphname</value>
+  </data>
+  <data name="&gt;&gt;button_nameconf_file.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="group_morphname.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 179</value>
+  </data>
+  <data name="group_morphname.Size" type="System.Drawing.Size, System.Drawing">
+    <value>548, 55</value>
+  </data>
+  <data name="group_morphname.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="group_morphname.Text" xml:space="preserve">
+    <value>Morph / bone name options</value>
+  </data>
+  <data name="&gt;&gt;group_morphname.Name" xml:space="preserve">
+    <value>group_morphname</value>
+  </data>
+  <data name="&gt;&gt;group_morphname.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;group_morphname.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;group_morphname.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 12</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>563, 448</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>readfacevmd</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>readfacevmd</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

@@ -129,4 +129,7 @@
   <data name="title_select_input_file" xml:space="preserve">
     <value>入力ファイル選択(動画または画像ファイル)</value>
   </data>
+  <data name="title_select_nameconf_file" xml:space="preserve">
+    <value>モーフ/ボーン名設定ファイル選択</value>
+  </data>
 </root>
