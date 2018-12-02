@@ -25,10 +25,6 @@ link_directories(${ICU_LIBRARY_DIRS})
 
 find_package(PkgConfig REQUIRED)
 
-pkg_check_modules(TBB tbb REQUIRED)
-include_directories(${TBB_INCLUDE_DIRS})
-link_directories(${TBB_LIBRARY_DIRS})
-
 pkg_check_modules(Eigen3 eigen3 REQUIRED)
 include_directories(${Eigen3_INCLUDE_DIRS})
 
@@ -38,9 +34,9 @@ target_link_libraries(readfacevmd FaceAnalyser)
 target_link_libraries(readfacevmd GazeAnalyser)
 target_link_libraries(readfacevmd Utilities)
 target_link_libraries(readfacevmd dlib)
+target_link_libraries(readfacevmd pthread)
 target_link_libraries(readfacevmd ${OpenCV_LIBRARIES})
 target_link_libraries(readfacevmd ${Boost_LIBRARIES})
-target_link_libraries(readfacevmd ${TBB_LIBRARIES})
 target_link_libraries(readfacevmd ${BLAS_LIBRARIES})
 target_link_libraries(readfacevmd ${ICU_LIBRARIES})
 

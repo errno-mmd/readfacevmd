@@ -9,7 +9,6 @@ Facial landmark detection (顔器官検出)、顔の各部分の動きの認識�
 
 - [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace)
 - boost
-- TBB
 - dlib
 - OpenBLAS
 - OpenCV

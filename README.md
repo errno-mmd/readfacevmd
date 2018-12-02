@@ -10,7 +10,6 @@ Japanese version of this README: [README.ja.md](README.ja.md)
 You need to install the following libraries to build / run readfacevmd.
 - [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace)
 - boost
-- TBB
 - dlib
 - OpenBLAS
 - OpenCV
@@ -52,7 +51,7 @@ If the process finished successfully, VMD_FILE may contain some facial expressio
 
 Readfacevmd itself is under the MIT license. See [LICENSE](LICENSE) file for more details.
 
-You have to respect OpenFace, boost, TBB, dlib, OpenBLAS, OpenCV, ICU, and Eigen licenses
+You have to respect OpenFace, boost, dlib, OpenBLAS, OpenCV, ICU, and Eigen licenses
 when you use readfacevmd linked to those libraries.
 Especially, commercial use of OpenFace is not allowed unless you have a commercial license of OpenFace toolkit.
 You also have to respect the licenses of the datasets used for OpenFace's model training - https://github.com/TadasBaltrusaitis/OpenFace/wiki/Datasets
