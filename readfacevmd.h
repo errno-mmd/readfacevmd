@@ -4,6 +4,8 @@
 #ifndef READFACEVMD_H
 #define READFACEVMD_H
 
+#include <string>
+
 #ifdef RFV_USE_DLL
 #ifdef RFV_DLL_EXPORT
 #define RFV_DLL_DECL extern "C" __declspec(dllexport)
@@ -14,7 +16,8 @@
 #define RFV_DLL_DECL
 #endif // ifdef RFV_USE_DLL
 
-RFV_DLL_DECL int read_face_vmd(const char* image_file_name, const char* vmd_file_name, float cutoff_freq,
-			       float threshold_pos, float threshold_rot, float threshold_morph);
+RFV_DLL_DECL int read_face_vmd(const std::string& image_file_name, const std::string& vmd_file_name,
+			       float cutoff_freq, float threshold_pos, float threshold_rot, float threshold_morph,
+			       const std::string& nameconf_file_name);
 
 #endif // ifndef READFACEVMD_H

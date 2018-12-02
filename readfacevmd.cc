@@ -18,6 +18,7 @@
 #include "smooth_reduce.h"
 #include "MMDFileIOUtil.h"
 #include "VMD.h"
+#include "morph_name.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -96,8 +97,7 @@ void add_head_pose(vector<VMD_Frame>& frame_vec, const Quaterniond& rot, uint32_
 // センターの位置のキーフレームを VMD_Frame の vector に格納する
 void add_center_frame(vector<VMD_Frame>& frame_vec, const Vector3f& pos, uint32_t frame_number)
 {
-  // string bone_name = u8"センター";
-  string bone_name = u8"全ての親";
+  string bone_name = u8"センター";
   add_position_pose(frame_vec, pos, frame_number, bone_name);
 }
 
@@ -237,9 +237,15 @@ void init_vmd_header(VMD_Header& h)
 }
 
 // image_file_name で指定された画像/動画ファイルから表情を推定して vmd_file_name に出力する
-RFV_DLL_DECL int read_face_vmd(const char* image_file_name, const char* vmd_file_name, float cutoff_freq,
-			       float threshold_pos, float threshold_rot, float threshold_morph)
+RFV_DLL_DECL int read_face_vmd(const std::string& image_file_name, const std::string& vmd_file_name,
+			       float cutoff_freq, float threshold_pos, float threshold_rot, float threshold_morph,
+			       const std::string& nameconf_file_name)
 {
+  map<string, string> rename_map;
+  if (nameconf_file_name.length() != 0) {
+    rename_map = make_rename_map(string(nameconf_file_name));
+  }
+  
   vector<string> arg_str;
   arg_str.push_back("-f");
   arg_str.push_back(image_file_name);
@@ -306,6 +312,10 @@ RFV_DLL_DECL int read_face_vmd(const char* image_file_name, const char* vmd_file
   smooth_and_reduce(vmd, cutoff_freq, threshold_pos, threshold_rot, threshold_morph);
   cout << "smoothing & reduction end" << endl;
 
+  cout << "rename morph & bone" << endl;
+  rename_morph(vmd, rename_map);
+  rename_frame(vmd, rename_map);
+  
   cout << "VMD output start" << endl;
   cout << "output filename: " << vmd_file_name << endl;
   // VMDファイルを書き出す

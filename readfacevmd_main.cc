@@ -1,7 +1,8 @@
 // readfacevmd - reads facial expression from photo / movie and generate a VMD motion file.
 
-#include <iostream>
 #include <boost/program_options.hpp>
+#include <iostream>
+#include <string>
 #include "readfacevmd.h"
 
 using namespace std;
@@ -26,6 +27,7 @@ int main(int argc, char* argv[])
     ("th_pos", opt::value<float>(), "position threshold of keyframe reduction")
     ("th_rot", opt::value<float>(), "rotation threshold of keyframe reduction [degree]")
     ("th_morph", opt::value<float>(), "morph threshold of keyframe reduction")
+    ("nameconf", opt::value<string>(), "morph & bone name config file")
     ;
 
   opt::options_description hidden("hidden options");
@@ -42,6 +44,7 @@ int main(int argc, char* argv[])
   
   string fname_in;
   string fname_out;
+  string fname_nameconf = "";
   float cutoff_freq = 5.0; // [Hz]
   float threshold_pos = 0.2;
   float threshold_rot = 3.0; // [degree]
@@ -70,6 +73,9 @@ int main(int argc, char* argv[])
     if (vm.count("th_morph")) {
       threshold_morph = vm["th_morph"].as<float>();
     }
+    if (vm.count("nameconf")) {
+      fname_nameconf = vm["nameconf"].as<string>();
+    }
     fname_in = vm["input-file"].as<string>();
     fname_out = vm["output-file"].as<string>();
   } catch (exception& e) {
@@ -82,8 +88,9 @@ int main(int argc, char* argv[])
   cout << "threshold(position): " << threshold_pos << endl;
   cout << "threshold(rotation): " << threshold_rot << endl;
   cout << "threshold(morph): " << threshold_morph << endl;
+  cout << "nameconf: " << fname_nameconf << endl;
   
-  read_face_vmd(fname_in.c_str(), fname_out.c_str(), cutoff_freq, threshold_pos, threshold_rot, threshold_morph);
+  read_face_vmd(fname_in, fname_out, cutoff_freq, threshold_pos, threshold_rot, threshold_morph, fname_nameconf);
   
   return 0;
 }
