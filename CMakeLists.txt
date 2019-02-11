@@ -8,7 +8,7 @@ find_package(BLAS REQUIRED)
 include_directories(${BLAS_INCLUDE_DIRS})
 link_directories(${BLAS_LIBRARY_DIRS})
 
-find_package(OpenCV 3.3 REQUIRED)
+find_package(OpenCV 3.2 REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
 find_package(Boost 1.5.9 REQUIRED COMPONENTS filesystem system program_options)
