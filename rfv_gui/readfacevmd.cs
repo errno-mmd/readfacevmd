@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using rfv_gui.Properties;
+using System.Diagnostics;
 
 namespace rfv_gui
 {
@@ -107,7 +108,12 @@ namespace rfv_gui
 
         private void process_exited(object sender, EventArgs e)
         {
-            MessageBox.Show(Resources.msg_finished);
+            string msg = Resources.msg_finished;
+            Process proc = (Process)sender;
+            if (proc.ExitCode != 0) {
+                msg = Resources.msg_error_exit;
+            }
+            MessageBox.Show(msg);
             this.Invoke(new Action(() =>
             {
                 button_input_file.Enabled = true;

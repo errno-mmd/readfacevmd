@@ -120,6 +120,9 @@
   <data name="filter_vmd_file" xml:space="preserve">
     <value>VMDファイル(*.vmd)|*.vmd</value>
   </data>
+  <data name="msg_error_exit" xml:space="preserve">
+    <value>エラー</value>
+  </data>
   <data name="msg_finished" xml:space="preserve">
     <value>終了</value>
   </data>

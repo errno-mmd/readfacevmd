@@ -90,8 +90,8 @@ int main(int argc, char* argv[])
   cout << "threshold(morph): " << threshold_morph << endl;
   cout << "nameconf: " << fname_nameconf << endl;
   
-  read_face_vmd(fname_in, fname_out, cutoff_freq, threshold_pos, threshold_rot, threshold_morph, fname_nameconf);
+  int ret = read_face_vmd(fname_in, fname_out, cutoff_freq, threshold_pos, threshold_rot, threshold_morph, fname_nameconf);
   
-  return 0;
+  return ret;
 }
 

@@ -70,6 +70,15 @@ namespace rfv_gui.Properties {
         }
         
         /// <summary>
+        ///   Error に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string msg_error_exit {
+            get {
+                return ResourceManager.GetString("msg_error_exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Finished に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string msg_finished {
