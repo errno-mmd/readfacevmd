@@ -1,7 +1,5 @@
 // VMDモーションを平滑化する
 
-//#include <fstream>
-//#include <iostream>
 #include <map>
 #include <string>
 #include <vector>
@@ -15,34 +13,32 @@ using namespace Eigen;
 using namespace MMDFileIOUtil;
 using namespace std;
 
-void interpolate_frame(vector<VMD_Frame>& fv)
+void fill_bone_frame(vector<VMD_Frame>& fv)
 {
   // not implemented yet
 }
 
-void interpolate_morph(vector<VMD_Morph>& fv)
+void fill_morph_frame(vector<VMD_Morph>& fv)
 {
   // not implemented yet
 }
 
+// ローパスフィルタ。cutoff_freqより高い周波数成分を除去する
 void lowpass_filter(vector<float>& v, float cutoff_freq)
 {
   if (v.size() < 2) {
     return;
   }
-  //  cout << "lowpass_filter" << endl;
   FFT<float> fft;
   vector<complex<float>> freqvec;
   fft.fwd(freqvec, v);
 
   // フィルタリング
-  //  const float cutoff_freq = 5.0; // カットオフ周波数[Hz]
   const float sampling_freq = 30.0; // サンプリング周波数[Hz]。MMDは30FPSなので。
   int data_size = v.size();
   int cutoff_idx;
-  // cutoff_idx / data_size = cutoff_freq / sampling_freq
+  // 打ち切る位置(cutoff_idx)を求める： cutoff_idx / data_size = cutoff_freq / sampling_freq
   cutoff_idx = cutoff_freq * data_size / sampling_freq;
-  //  cout << "cutoff_idx: " << cutoff_idx << endl;
   
   vector<complex<float>> filtered(data_size);
   for (int i = 0; i < data_size; i++) {
@@ -55,15 +51,12 @@ void lowpass_filter(vector<float>& v, float cutoff_freq)
   fft.inv(v, filtered);
 }
 
+// ボーンキーフレーム列fvの値を平滑化する
+// 引数fvには同一ボーンのキーフレームがフレーム番号順に格納されているものとする
 void smooth_bone_frame(vector<VMD_Frame>& fv, float cutoff_freq)
 {
-  if (cutoff_freq < 0)
-    return;
-
   sort(fv.begin(), fv.end());
-  // uint32_t first_frame_num = fv.front().number;
-  // uint32_t last_frame_num = fv.back().number;
-  interpolate_frame(fv); // キーフレームの隙間をなくす
+  fill_bone_frame(fv); // キーフレームの隙間をなくす
   // ローパスフィルタにかける
   vector<float> x;
   for_each(fv.begin(), fv.end(), [&x](VMD_Frame f) { x.push_back(f.position.x()); });
@@ -127,21 +120,17 @@ void smooth_bone_frame(vector<VMD_Frame>& fv, float cutoff_freq)
   }
 }
 
+// 表情キーフレーム列mvの値を平滑化する
+// 引数mvには同一モーフのキーフレームがフレーム番号順に格納されているものとする
 void smooth_morph_frame(vector<VMD_Morph>& mv, float cutoff_freq)
 {
-  if (cutoff_freq < 0)
-    return;
-  
   sort(mv.begin(), mv.end());
-  // uint32_t first_frame_num = mv.front().frame;
-  // uint32_t last_frame_num = mv.back().frame;
-  interpolate_morph(mv); // キーフレームの隙間をなくす
+  fill_morph_frame(mv); // キーフレームの隙間をなくす
   // ローパスフィルタにかける
   vector<float> w;
   for_each(mv.begin(), mv.end(), [&w](VMD_Morph s) { w.push_back(s.weight); });
   lowpass_filter(w, cutoff_freq);
   for (unsigned int i = 0; i < w.size(); i++) {
-    //    cout << "weight: " << mv[i].weight << " => " << w[i] << endl;
     mv[i].weight = w[i];
     if (w[i] > 1.0) {
       mv[i].weight = 1.0;

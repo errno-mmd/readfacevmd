@@ -13,8 +13,10 @@ using namespace Eigen;
 using namespace MMDFileIOUtil;
 using namespace std;
 
+// VMDモーションの平滑化および間引きを行う
 bool smooth_and_reduce(VMD& vmd, float cutoff_freq, float threshold_pos, float threshold_rot, float threshold_morph)
 {
+  cout << "vmd.frame.size(original): " << vmd.frame.size() << endl;
   // キーフレームをボーンごとに分ける
   map<string, vector<VMD_Frame>> frame_map;
   for (unsigned int i = 0; i < vmd.frame.size(); i++) {
@@ -23,31 +25,21 @@ bool smooth_and_reduce(VMD& vmd, float cutoff_freq, float threshold_pos, float t
     sjis_to_utf8(frame.bonename, name, frame.bonename_len);
     frame_map[name].push_back(frame);
   }
-
-  // ボーンごとに平滑化と間引きを行う
-  for (auto iter = frame_map.begin(); iter != frame_map.end(); iter++) {
-    string name = iter->first;
-    vector<VMD_Frame>& fv = iter->second;
-    if (fv.size() > 0) {
-      smooth_bone_frame(fv, cutoff_freq);
-      VMD_Frame last_frame = fv.back();
-      fv = reduce_bone_frame(fv, 0, fv.size() - 1, threshold_pos, threshold_rot);
-      fv.push_back(last_frame);
-    }
-  }
-
-  // ボーンキーフレームを入れ替える
-  cout << "vmd.frame.size(original): " << vmd.frame.size() << endl;
+  // ボーンごとに平滑化と間引きを行い、vmdのボーンキーフレームを入れ替える
   vmd.frame.clear();
   for (auto iter = frame_map.begin(); iter != frame_map.end(); iter++) {
-    vector<VMD_Frame> fv = iter->second;
+    vector<VMD_Frame>& fv = iter->second;
+    if (fv.size() > 2) {
+      smooth_bone_frame(fv, cutoff_freq);
+      fv = reduce_bone_frame(fv, 0, fv.size() - 1, threshold_pos, threshold_rot);
+    }
     for (unsigned int i = 0; i < fv.size(); i++) {
       vmd.frame.push_back(fv[i]);
     }
   }
   cout << "vmd.frame.size(reduced): " << vmd.frame.size() << endl;
-
   
+  cout << "vmd.morph.size(original): " << vmd.morph.size() << endl;
   // キーフレームをモーフごとに分ける
   map<string, vector<VMD_Morph>> morph_map;
   for (unsigned int i = 0; i < vmd.morph.size(); i++) {
@@ -56,26 +48,16 @@ bool smooth_and_reduce(VMD& vmd, float cutoff_freq, float threshold_pos, float t
     sjis_to_utf8(morph.name, name, morph.name_len);
     morph_map[name].push_back(morph);
   }
-
-  // モーフごとに平滑化と間引きを行う
-  for (auto iter = morph_map.begin(); iter != morph_map.end(); iter++) {
-    string name = iter->first;
-    vector<VMD_Morph>& mv = iter->second;
-    if (mv.size() > 0) {
-      smooth_morph_frame(mv, cutoff_freq);
-      VMD_Morph last_morph = mv.back();
-      mv = reduce_morph_frame(mv, 0, mv.size() - 1, threshold_morph);
-      mv.push_back(last_morph);
-    }
-  }
-
-  // 表情キーフレームを入れ替える
-  cout << "vmd.morph.size(original): " << vmd.morph.size() << endl;
+  // モーフごとに平滑化と間引きを行い、vmdの表情キーフレームを入れ替える
   vmd.morph.clear();
   for (auto iter = morph_map.begin(); iter != morph_map.end(); iter++) {
-    vector<VMD_Morph> sv = iter->second;
-    for (unsigned int i = 0; i < sv.size(); i++) {
-      vmd.morph.push_back(sv[i]);
+    vector<VMD_Morph>& mv = iter->second;
+    if (mv.size() > 2) {
+      smooth_morph_frame(mv, cutoff_freq);
+      mv = reduce_morph_frame(mv, 0, mv.size() - 1, threshold_morph);
+    }
+    for (unsigned int i = 0; i < mv.size(); i++) {
+      vmd.morph.push_back(mv[i]);
     }
   }
   cout << "vmd.morph.size(reduced) : " << vmd.morph.size() << endl;
