@@ -40,5 +40,8 @@ target_link_libraries(readfacevmd ${Boost_LIBRARIES})
 target_link_libraries(readfacevmd ${OpenBLAS_LIBRARIES})
 target_link_libraries(readfacevmd ${ICU_LIBRARIES})
 
+add_executable(mergevmd mergevmd.cc MMDFileIOUtil.cc VMD.cc reducevmd.cc)
+target_link_libraries(mergevmd ${ICU_LIBRARIES})
+
 set(CMAKE_CXX_FLAGS "-g -Wall -std=c++11")
 

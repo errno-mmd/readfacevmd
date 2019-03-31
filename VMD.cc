@@ -157,7 +157,7 @@ int VMD::input(ifstream& s)
       show_ik.push_back(tmp);
     }
 
-  } catch (ifstream::failure e) {
+  } catch (ifstream::failure& e) {
     std::cerr << "PMX model read error\n";
     return -1;
   }
