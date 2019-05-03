@@ -7,20 +7,53 @@
 #include <unsupported/Eigen/FFT>
 #include "VMD.h"
 #include "MMDFileIOUtil.h"
+#include "reducevmd.h"
 #include "smoothvmd.h"
 
 using namespace Eigen;
 using namespace MMDFileIOUtil;
 using namespace std;
 
-void fill_bone_frame(vector<VMD_Frame>& fv)
+vector<VMD_Frame> fill_bone_frame(const vector<VMD_Frame>& fv)
 {
-  // not implemented yet
+  vector<VMD_Frame> fv_new;
+  VMD_Frame f_old = fv[0];
+  f_old.number--;
+  for (VMD_Frame f : fv) {
+    // もしフレーム番号が重複していたら、重複したフレームは消す
+    if (f.number == f_old.number) {
+      continue;
+    }
+    // フレーム番号が連続していない場合、途中のフレームを補間する
+    for (uint32_t i = f_old.number + 1; i < f.number; i++) {
+      VMD_Frame interpolated = interpolate_frame(f_old, f, i);
+      fv_new.push_back(interpolated);
+    }
+    fv_new.push_back(f);
+    f_old = f;
+  }
+  return fv_new;
 }
 
-void fill_morph_frame(vector<VMD_Morph>& fv)
+vector<VMD_Morph> fill_morph_frame(vector<VMD_Morph>& mv)
 {
-  // not implemented yet
+  vector<VMD_Morph> mv_new;
+  VMD_Morph m_old = mv[0];
+  m_old.frame--;
+  for (VMD_Morph m : mv) {
+    // もしフレーム番号が重複していたら、重複したフレームは消す
+    if (m.frame == m_old.frame) {
+      continue;
+    }
+    // フレーム番号が連続していない場合、途中のフレームを補間する
+    for (uint32_t i = m_old.frame + 1; i < m.frame; i++) {
+      VMD_Morph interpolated = interpolate_morph(m_old, m, i);
+      mv_new.push_back(interpolated);
+    }
+    mv_new.push_back(m);
+    m_old = m;
+  }
+  return mv_new;
 }
 
 // ローパスフィルタ。cutoff_freqより高い周波数成分を除去する
@@ -55,8 +88,12 @@ void lowpass_filter(vector<float>& v, float cutoff_freq)
 // 引数fvには同一ボーンのキーフレームがフレーム番号順に格納されているものとする
 void smooth_bone_frame(vector<VMD_Frame>& fv, float cutoff_freq)
 {
+  if (cutoff_freq < 0) {
+    return;
+  }
+  
   sort(fv.begin(), fv.end());
-  fill_bone_frame(fv); // キーフレームの隙間をなくす
+  fv = fill_bone_frame(fv); // キーフレームの隙間をなくす
   // ローパスフィルタにかける
   vector<float> x;
   for_each(fv.begin(), fv.end(), [&x](VMD_Frame f) { x.push_back(f.position.x()); });
@@ -124,8 +161,12 @@ void smooth_bone_frame(vector<VMD_Frame>& fv, float cutoff_freq)
 // 引数mvには同一モーフのキーフレームがフレーム番号順に格納されているものとする
 void smooth_morph_frame(vector<VMD_Morph>& mv, float cutoff_freq)
 {
+  if (cutoff_freq < 0) {
+    return;
+  }
+    
   sort(mv.begin(), mv.end());
-  fill_morph_frame(mv); // キーフレームの隙間をなくす
+  mv = fill_morph_frame(mv); // キーフレームの隙間をなくす
   // ローパスフィルタにかける
   vector<float> w;
   for_each(mv.begin(), mv.end(), [&w](VMD_Morph s) { w.push_back(s.weight); });

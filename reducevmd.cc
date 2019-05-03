@@ -14,7 +14,7 @@ void optimize_bezier_parameter(VMD_Frame& head_frame, const vector<VMD_Frame>& v
   // 未実装
 }
 
-// head_frameとtail_frameを元に、補間でframe_num番目のフレームを作る
+// head_frameとtail_frameを元に、補間でframe_num番目のボーンフレームを作る
 VMD_Frame interpolate_frame(const VMD_Frame& head_frame, const VMD_Frame& tail_frame, int frame_num, bool bezier)
 {
   VMD_Frame f;
@@ -31,6 +31,16 @@ VMD_Frame interpolate_frame(const VMD_Frame& head_frame, const VMD_Frame& tail_f
     f.rotation = head_frame.rotation.slerp(ratio, tail_frame.rotation);
   }
   return f;
+}
+
+// head_frameとtail_frameを元に、補間でframe_num番目の表情フレームを作る
+VMD_Morph interpolate_morph(const VMD_Morph& head_frame, const VMD_Morph& tail_frame, int frame_num)
+{
+  VMD_Morph m;
+  int total = tail_frame.frame - head_frame.frame;
+  float ratio = float(frame_num - head_frame.frame) / total;
+  m.weight = head_frame.weight + (tail_frame.weight - head_frame.weight) * ratio;
+  return m;
 }
 
 // head番目からtail番目のボーンキーフレームのうち、残すべきものを再帰的に探して返す。
@@ -55,8 +65,7 @@ vector<VMD_Frame> reduce_bone_frame_recursive(const vector<VMD_Frame>& v, int he
       max_idx_pos = i;
       max_pos_err = pos_err;
     }
-    Quaternionf q_err = f.rotation * v[i].rotation.inverse();
-    float rot_err = acos(q_err.w()) * 2 * 180 / M_PI; // 角度を取得。単位はdegree
+    float rot_err = fabs(f.rotation.angularDistance(v[i].rotation) * 180 / M_PI);
     if (rot_err > max_rot_err) {
       max_idx_rot = i;
       max_rot_err = rot_err;
@@ -85,6 +94,11 @@ vector<VMD_Frame> reduce_bone_frame_recursive(const vector<VMD_Frame>& v, int he
 // head番目からtail番目のボーンキーフレームのうち、残すべきものを探して返す。
 vector<VMD_Frame> reduce_bone_frame(const vector<VMD_Frame>& v, int head, int tail, float threshold_pos, float threshold_rot, bool bezier)
 {
+  if (threshold_pos < 0 || threshold_rot < 0) {
+    vector<VMD_Frame> v1(v);
+    return v1;
+  }
+
   vector<VMD_Frame> v1 = reduce_bone_frame_recursive(v, head, tail, threshold_pos, threshold_rot, bezier);
   v1.push_back(v.back());
   return v1;
@@ -120,6 +134,11 @@ vector<VMD_Morph> reduce_morph_frame_recursive(const vector<VMD_Morph>& v, int h
 // head番目からtail番目の表情キーフレームのうち、残すべきものを探して返す。
 vector<VMD_Morph> reduce_morph_frame(const vector<VMD_Morph>& v, int head, int tail, float threshold)
 {
+  if (threshold < 0) {
+    vector<VMD_Morph> v1(v);
+    return v1;
+  }
+
   vector<VMD_Morph> v1 = reduce_morph_frame_recursive(v, head, tail, threshold);
   v1.push_back(v.back());
   return v1;
