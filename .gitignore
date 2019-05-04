@@ -9,6 +9,8 @@
 /x64/
 /rfv_gui/obj/
 /rfv_gui/bin/
+/mergevmd/Release/
+/mergevmd/x64/
 
 *~
 TAGS
