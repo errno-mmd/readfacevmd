@@ -17,7 +17,8 @@ void optimize_bezier_parameter(VMD_Frame& head_frame, const vector<VMD_Frame>& v
 // head_frameとtail_frameを元に、補間でframe_num番目のボーンフレームを作る
 VMD_Frame interpolate_frame(const VMD_Frame& head_frame, const VMD_Frame& tail_frame, int frame_num, bool bezier)
 {
-  VMD_Frame f;
+  VMD_Frame f = head_frame;
+  f.number = frame_num;
   if (bezier) {
     // ベジェ曲線補間
 
@@ -36,7 +37,8 @@ VMD_Frame interpolate_frame(const VMD_Frame& head_frame, const VMD_Frame& tail_f
 // head_frameとtail_frameを元に、補間でframe_num番目の表情フレームを作る
 VMD_Morph interpolate_morph(const VMD_Morph& head_frame, const VMD_Morph& tail_frame, int frame_num)
 {
-  VMD_Morph m;
+  VMD_Morph m = head_frame;
+  m.frame = frame_num;
   int total = tail_frame.frame - head_frame.frame;
   float ratio = float(frame_num - head_frame.frame) / total;
   m.weight = head_frame.weight + (tail_frame.weight - head_frame.weight) * ratio;
