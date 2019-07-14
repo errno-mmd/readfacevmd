@@ -121,64 +121,40 @@
   <data name="label_input_file.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 12</value>
   </data>
-  <data name="label_input_file.Text" xml:space="preserve">
-    <value>入力ファイル</value>
+  <data name="label_body_file.Text" xml:space="preserve">
+    <value>体のモーション</value>
   </data>
-  <data name="button_input_file.Text" xml:space="preserve">
+  <data name="button_body_file.Text" xml:space="preserve">
     <value>参照</value>
   </data>
   <data name="button_run.Text" xml:space="preserve">
-    <value>VMDファイル生成</value>
+    <value>VMDマージ実行</value>
   </data>
-  <data name="group_smoothing.Text" xml:space="preserve">
-    <value>平滑化(smoothing)</value>
+  <data name="group_input.Text" xml:space="preserve">
+    <value>入力ファイル</value>
   </data>
   <data name="label_cutoff.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 12</value>
   </data>
-  <data name="label_cutoff.Text" xml:space="preserve">
-    <value>カットオフ周波数 [Hz]</value>
-  </data>
   <data name="check_smoothing.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 16</value>
-  </data>
-  <data name="check_smoothing.Text" xml:space="preserve">
-    <value>平滑化する</value>
-  </data>
-  <data name="group_reduction.Text" xml:space="preserve">
-    <value>間引き(reduction)</value>
   </data>
   <data name="label_th_morph.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 12</value>
   </data>
-  <data name="label_th_morph.Text" xml:space="preserve">
-    <value>モーフの許容誤差</value>
-  </data>
   <data name="label_th_rot.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 12</value>
-  </data>
-  <data name="label_th_rot.Text" xml:space="preserve">
-    <value>回転の許容誤差</value>
   </data>
   <data name="label_th_pos.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 12</value>
   </data>
-  <data name="label_th_pos.Text" xml:space="preserve">
-    <value>位置の許容誤差</value>
-  </data>
   <data name="check_reduction.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 16</value>
   </data>
-  <data name="check_reduction.Text" xml:space="preserve">
-    <value>キーフレームを間引く</value>
-  </data>
-  <data name="button_nameconf_file.Text" xml:space="preserve">
+  <data name="button_face_file.Text" xml:space="preserve">
     <value>参照</value>
   </data>
-  <data name="group_morphname.Text" xml:space="preserve">
-    <value>モーフ/ボーン名オプション</value>
-  </data>
-  <data name="label_nameconf_file.Text" xml:space="preserve">
-    <value>設定ファイル</value>
+  <data name="label_face_file.Text" xml:space="preserve">
+    <value>顔のモーション</value>
   </data>
 </root>

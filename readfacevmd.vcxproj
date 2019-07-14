@@ -188,6 +188,8 @@ xcopy /I /E /Y /D /C "C:\opt\icu4c\bin64\icuuc62.dll" "$(OutDir)"
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="fpschanger.cc" />
+    <ClCompile Include="interpolate.cc" />
     <ClCompile Include="MMDFileIOUtil.cc" />
     <ClCompile Include="morph_name.cc" />
     <ClCompile Include="readfacevmd.cc" />
@@ -198,6 +200,8 @@ xcopy /I /E /Y /D /C "C:\opt\icu4c\bin64\icuuc62.dll" "$(OutDir)"
     <ClCompile Include="VMD.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="fpschanger.h" />
+    <ClInclude Include="interpolate.h" />
     <ClInclude Include="MMDFileIOUtil.h" />
     <ClInclude Include="readfacevmd.h" />
     <ClInclude Include="reducevmd.h" />
