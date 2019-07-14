@@ -1,10 +1,11 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.8)
+set(CMAKE_CXX_STANDARD 17)
 
 # modify if you installed OpenFace into a different directory
 include_directories(/usr/local/include/OpenFace)
 link_directories(/usr/local/lib)
 
-find_package(OpenCV 3.2 REQUIRED)
+find_package(OpenCV 4.0 REQUIRED COMPONENTS core imgproc calib3d highgui objdetect)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
 find_package(Boost 1.5.9 REQUIRED COMPONENTS filesystem system program_options)
@@ -13,9 +14,6 @@ include_directories(${Boost_INCLUDE_DIRS}/boost)
 link_directories(${Boost_LIBRARY_DIRS})	
 
 find_package(ICU REQUIRED COMPONENTS i18n uc)
-# MESSAGE("ICU_INCLUDE_DIRS: ${ICU_INCLUDE_DIRS}")
-# MESSAGE("ICU_LIBRARIES: ${ICU_LIBRARIES}")
-# MESSAGE("ICU_LIBRARY_DIRS: ${ICU_LIBRARY_DIRS}")
 include_directories(${ICU_INCLUDE_DIRS})
 link_directories(${ICU_LIBRARY_DIRS})
 
@@ -43,5 +41,4 @@ target_link_libraries(readfacevmd ${ICU_LIBRARIES})
 add_executable(mergevmd mergevmd.cc MMDFileIOUtil.cc VMD.cc reducevmd.cc)
 target_link_libraries(mergevmd ${ICU_LIBRARIES})
 
-set(CMAKE_CXX_FLAGS "-g -Wall -std=c++11")
-
+set(CMAKE_CXX_FLAGS "-g -Wall")

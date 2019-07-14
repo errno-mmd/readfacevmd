@@ -7,6 +7,8 @@
 #include <map>
 #include "VMD.h"
 
+using namespace std;
+
 map<string, string> make_rename_map(string fname_conf);
 void rename_morph(VMD& v, const map<string, string>& rename_map);
 void rename_frame(VMD& v, const map<string, string>& rename_map);
