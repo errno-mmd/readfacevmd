@@ -26,7 +26,7 @@ pkg_check_modules(OpenBLAS openblas REQUIRED)
 include_directories(${OpenBLAS_INCLUDE_DIRS})
 link_directories(${OpenBLAS_LIBRARY_DIRS})
 
-add_executable(readfacevmd readfacevmd_main.cc readfacevmd.cc MMDFileIOUtil.cc VMD.cc smooth_reduce.cc smoothvmd.cc reducevmd.cc morph_name.cc)
+add_executable(readfacevmd readfacevmd_main.cc readfacevmd.cc MMDFileIOUtil.cc VMD.cc smooth_reduce.cc smoothvmd.cc reducevmd.cc morph_name.cc interpolate.cc fpschanger.cc)
 target_link_libraries(readfacevmd LandmarkDetector)
 target_link_libraries(readfacevmd FaceAnalyser)
 target_link_libraries(readfacevmd GazeAnalyser)
@@ -38,7 +38,7 @@ target_link_libraries(readfacevmd ${Boost_LIBRARIES})
 target_link_libraries(readfacevmd ${OpenBLAS_LIBRARIES})
 target_link_libraries(readfacevmd ${ICU_LIBRARIES})
 
-add_executable(mergevmd mergevmd.cc MMDFileIOUtil.cc VMD.cc reducevmd.cc)
+add_executable(mergevmd mergevmd.cc MMDFileIOUtil.cc VMD.cc reducevmd.cc interpolate.cc)
 target_link_libraries(mergevmd ${ICU_LIBRARIES})
 
 set(CMAKE_CXX_FLAGS "-g -Wall")

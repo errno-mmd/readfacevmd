@@ -266,6 +266,9 @@ RFV_DLL_DECL int read_face_vmd(const std::string& image_file_name, const std::st
   VMD vmd;
   init_vmd_header(vmd.header);
 
+  float srcfps = cap.fps;
+  float tgtfps = 30.0;
+
   for (uint32_t frame_number = 0; true; frame_number++) {
     cout << "frame:" << frame_number << endl;
     cv::Mat image = cap.GetNextFrame();
@@ -309,7 +312,8 @@ RFV_DLL_DECL int read_face_vmd(const std::string& image_file_name, const std::st
   cout << "position threshold: " << threshold_pos << endl;
   cout << "rotation threshold: " << threshold_rot << endl;
   cout << "morph threshold: " << threshold_morph << endl;
-  smooth_and_reduce(vmd, cutoff_freq, threshold_pos, threshold_rot, threshold_morph);
+  smooth_and_reduce(vmd, cutoff_freq, threshold_pos, threshold_rot, threshold_morph,
+                    srcfps, tgtfps, false);
   cout << "smoothing & reduction end" << endl;
 
   cout << "rename morph & bone" << endl;

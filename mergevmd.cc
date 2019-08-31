@@ -8,7 +8,8 @@
 #include <vector>
 #include "VMD.h"
 #include "MMDFileIOUtil.h"
-#include "reducevmd.h"
+#include "interpolate.h"
+//#include "reducevmd.h"
 
 using namespace Eigen;
 using namespace MMDFileIOUtil;
@@ -27,7 +28,7 @@ Quaternionf rot_frame(const vector<VMD_Frame>& frames, uint32_t n)
     if (f.number == n) {
       return f.rotation;
     } else if (f.number > n) {
-      VMD_Frame f_i = interpolate_frame(f_old, f, n);
+      VMD_Frame f_i = interpolate_frame(f_old, f, n, false);
       return f_i.rotation;
     }
     f_old = f;

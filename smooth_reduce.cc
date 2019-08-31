@@ -6,6 +6,7 @@
 #include <unsupported/Eigen/FFT>
 #include "VMD.h"
 #include "MMDFileIOUtil.h"
+#include "fpschanger.h"
 #include "smoothvmd.h"
 #include "reducevmd.h"
 
@@ -14,7 +15,8 @@ using namespace MMDFileIOUtil;
 using namespace std;
 
 // VMDモーションの平滑化および間引きを行う
-bool smooth_and_reduce(VMD& vmd, float cutoff_freq, float threshold_pos, float threshold_rot, float threshold_morph)
+bool smooth_and_reduce(VMD& vmd, float cutoff_freq, float threshold_pos, float threshold_rot,
+                       float threshold_morph, float srcfps, float tgtfps, bool bezier)
 {
   cout << "vmd.frame.size(original): " << vmd.frame.size() << endl;
   // キーフレームをボーンごとに分ける
@@ -30,8 +32,11 @@ bool smooth_and_reduce(VMD& vmd, float cutoff_freq, float threshold_pos, float t
   for (auto iter = frame_map.begin(); iter != frame_map.end(); iter++) {
     vector<VMD_Frame>& fv = iter->second;
     if (fv.size() > 2) {
-      smooth_bone_frame(fv, cutoff_freq);
-      fv = reduce_bone_frame(fv, 0, fv.size() - 1, threshold_pos, threshold_rot);
+      smooth_bone_frame(fv, cutoff_freq, bezier);
+      if (srcfps != tgtfps) {
+        fv = change_fps_bone(fv, srcfps, tgtfps, bezier);
+      }
+      fv = reduce_bone_frame(fv, 0, fv.size() - 1, threshold_pos, threshold_rot, bezier);
     }
     for (unsigned int i = 0; i < fv.size(); i++) {
       vmd.frame.push_back(fv[i]);
@@ -54,6 +59,9 @@ bool smooth_and_reduce(VMD& vmd, float cutoff_freq, float threshold_pos, float t
     vector<VMD_Morph>& mv = iter->second;
     if (mv.size() > 2) {
       smooth_morph_frame(mv, cutoff_freq);
+      if (srcfps != tgtfps) {
+        mv = change_fps_morph(mv, srcfps, tgtfps);
+      }
       mv = reduce_morph_frame(mv, 0, mv.size() - 1, threshold_morph);
     }
     for (unsigned int i = 0; i < mv.size(); i++) {

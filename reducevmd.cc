@@ -3,47 +3,11 @@
 #include <vector>
 #include <Eigen/Core>
 #include "VMD.h"
+#include "interpolate.h"
 #include "reducevmd.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
-
-// head番めからtail番目までの誤差が最小になるようhead_frameの補間曲線パラメータを調整する
-void optimize_bezier_parameter(VMD_Frame& head_frame, const vector<VMD_Frame>& v, int head, int tail)
-{
-  // 未実装
-}
-
-// head_frameとtail_frameを元に、補間でframe_num番目のボーンフレームを作る
-VMD_Frame interpolate_frame(const VMD_Frame& head_frame, const VMD_Frame& tail_frame, int frame_num, bool bezier)
-{
-  VMD_Frame f = head_frame;
-  f.number = frame_num;
-  if (bezier) {
-    // ベジェ曲線補間
-
-    // 未実装
-
-  } else {
-    // 線形補間
-    int total = tail_frame.number - head_frame.number;
-    float ratio = float(frame_num - head_frame.number) / total;
-    f.position = head_frame.position + (tail_frame.position - head_frame.position) * ratio;
-    f.rotation = head_frame.rotation.slerp(ratio, tail_frame.rotation);
-  }
-  return f;
-}
-
-// head_frameとtail_frameを元に、補間でframe_num番目の表情フレームを作る
-VMD_Morph interpolate_morph(const VMD_Morph& head_frame, const VMD_Morph& tail_frame, int frame_num)
-{
-  VMD_Morph m = head_frame;
-  m.frame = frame_num;
-  int total = tail_frame.frame - head_frame.frame;
-  float ratio = float(frame_num - head_frame.frame) / total;
-  m.weight = head_frame.weight + (tail_frame.weight - head_frame.weight) * ratio;
-  return m;
-}
 
 // head番目からtail番目のボーンキーフレームのうち、残すべきものを再帰的に探して返す。
 // ただし返値にtail番目のボーンは含まれないので、コール元で追加する必要がある。
@@ -53,13 +17,14 @@ vector<VMD_Frame> reduce_bone_frame_recursive(const vector<VMD_Frame>& v, int he
   float max_rot_err = 0.0;
   int max_idx_pos = 0;
   int max_idx_rot = 0;
-  // headフレームの値とtailフレームの値によって決まる補完曲線(直線)から最も離れた(誤差の大きい)フレームを探す
   VMD_Frame head_frame = v[head];
   VMD_Frame tail_frame = v[tail];
-  if (bezier) {
-    optimize_bezier_parameter(head_frame, v, head, tail);
+  const int bezier_interpolation_limit = 60;
+  if (bezier && tail - head < bezier_interpolation_limit) {
+    optimize_bezier_parameter(tail_frame, v, head, tail);
   }
 
+  // headフレームの値とtailフレームの値によって決まる補完曲線(直線)から最も離れた(誤差の大きい)フレームを探す
   for (int i = head + 1; i < tail; i++) {
     VMD_Frame f = interpolate_frame(head_frame, tail_frame, i, bezier);
     float pos_err = (f.position - v[i].position).norm();
@@ -87,7 +52,7 @@ vector<VMD_Frame> reduce_bone_frame_recursive(const vector<VMD_Frame>& v, int he
       vector<VMD_Frame> v2 = reduce_bone_frame_recursive(v, max_idx_rot, tail, threshold_pos, threshold_rot, bezier);
       v1.insert(v1.end(), v2.begin(), v2.end());
     } else {
-      v1.push_back(head_frame);
+      v1.push_back(tail_frame);
     }
   }
   return v1;
@@ -102,7 +67,8 @@ vector<VMD_Frame> reduce_bone_frame(const vector<VMD_Frame>& v, int head, int ta
   }
 
   vector<VMD_Frame> v1 = reduce_bone_frame_recursive(v, head, tail, threshold_pos, threshold_rot, bezier);
-  v1.push_back(v.back());
+  v1.insert(v1.begin(), v.front());
+
   return v1;
 }
   

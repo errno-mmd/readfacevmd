@@ -8,6 +8,7 @@
 #include <Eigen/Geometry>
 #include <fstream>
 #include <iostream>
+#include <string>
 #include <vector>
 
 using std::ifstream;
@@ -32,13 +33,21 @@ public:
 // ボーンキーフレーム
 class VMD_Frame {
 public:
-  VMD_Frame() : bonename(""), number(0), position(Vector3f::Zero()), rotation(Quaternionf::Identity()), interpolation{0} { }
+  VMD_Frame() : bonename(""), number(0), position(Vector3f::Zero()), rotation(Quaternionf::Identity()) { }
+  VMD_Frame(std::string name, int number, Eigen::Vector3f position, Eigen::Quaternionf rotation)
+  : number(number), position(position), rotation(rotation) {
+    std::strncpy(bonename, name.c_str(), bonename_len);
+  }
   void read(ifstream& s);
   void write(ofstream& s);
   bool operator<(const VMD_Frame& right) const {
     return number < right.number;
   }
-  
+  void set_interpolation_x(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
+  void set_interpolation_y(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
+  void set_interpolation_z(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
+  void set_interpolation_r(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
+
   static const int bonename_len = 15;
   static const int interpolation_len = 64;
   
@@ -46,7 +55,16 @@ public:
   uint32_t number;   // frame number
   Vector3f position; // 位置(x, y, z)
   Quaternionf rotation; // 回転を表すクォータニオン
-  uint8_t interpolation[interpolation_len];       // interpolation parameter
+  uint8_t interpolation[interpolation_len] = {
+    0x14, 0x14, 0x00, 0x00, 0x14, 0x14, 0x14, 0x14,
+    0x6b, 0x6b, 0x6b, 0x6b, 0x6b, 0x6b, 0x6b, 0x6b,
+    0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x6b,
+    0x6b, 0x6b, 0x6b, 0x6b, 0x6b, 0x6b, 0x6b, 0x00,
+    0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x6b, 0x6b,
+    0x6b, 0x6b, 0x6b, 0x6b, 0x6b, 0x6b, 0x00, 0x00,
+    0x14, 0x14, 0x14, 0x14, 0x14, 0x6b, 0x6b, 0x6b,
+    0x6b, 0x6b, 0x6b, 0x6b, 0x6b, 0x00, 0x00, 0x00
+  };       // interpolation parameter
 };
 
 // 表情キーフレーム

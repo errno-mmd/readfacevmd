@@ -158,7 +158,7 @@ int VMD::input(ifstream& s)
     }
 
   } catch (ifstream::failure& e) {
-    std::cerr << "PMX model read error\n";
+    std::cerr << "VMD file read error\n";
     return -1;
   }
 
@@ -273,3 +273,45 @@ int VMD::output(ofstream& s)
   // cout << "output end" << endl;
   return 0;
 }
+
+// X軸方向移動の補間パラメータをセットする
+void VMD_Frame::set_interpolation_x(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2)
+{
+  uint8_t* ip = interpolation;
+  ip[ 0] = x1; // X_x1
+  ip[ 4] = ip[19] = ip[34] = ip[49] = y1; // X_y1
+  ip[ 8] = ip[23] = ip[38] = ip[53] = x2; // X_x2
+  ip[12] = ip[27] = ip[42] = ip[57] = y2; // X_y2
+}
+
+void VMD_Frame::set_interpolation_y(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2)
+{
+  uint8_t* ip = interpolation;
+  ip[ 1] = ip[16] = x1; // Y_x1
+  ip[ 5] = ip[20] = ip[35] = ip[50] = y1; // Y_y1
+  ip[ 9] = ip[24] = ip[39] = ip[54] = x2; // Y_x2
+  ip[13] = ip[28] = ip[43] = ip[58] = y2; // Y_y2
+}
+
+void VMD_Frame::set_interpolation_z(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2)
+{
+  uint8_t* ip = interpolation;
+  ip[ 2] = ip[17] = ip[32] = x1; // Z_x1
+  ip[ 6] = ip[21] = ip[36] = ip[51] = y1; // Z_y1
+  ip[10] = ip[25] = ip[40] = ip[55] = x2; // Z_x2
+  ip[14] = ip[29] = ip[44] = ip[59] = y2; // Z_y2
+
+  ip[2] = 0; // MMD 9.31では0になっている
+}
+
+void VMD_Frame::set_interpolation_r(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2)
+{
+  uint8_t* ip = interpolation;
+  ip[ 3] = ip[18] = ip[33] = ip[48] = x1; // R_x1
+  ip[ 7] = ip[22] = ip[37] = ip[52] = y1; // R_y1
+  ip[11] = ip[26] = ip[41] = ip[56] = x2; // R_x2
+  ip[15] = ip[30] = ip[45] = ip[60] = y2; // R_y2
+
+  ip[3] = 0; // MMD 9.31では0になっている
+}
+

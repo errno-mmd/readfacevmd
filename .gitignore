@@ -1,6 +1,7 @@
 /.backup/
 /.memo/
 /.vs/
+/.vscode/
 /archive/
 /build/
 /output/
