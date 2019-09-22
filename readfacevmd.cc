@@ -201,28 +201,18 @@ void estimate_facial_expression(vector<VMD_Morph>& morph_vec, double* au, uint32
 
   // 目
   double blink = au[AUID::LidTightener];
-  //  if (blink > 0.5 || au[AUID::Blink] > 0) {
   if (au[AUID::Blink] > 0.2) {
     blink = 1.0;
   }
-  double eye_smile = 0;
-  if (au[AUID::CheekRaiser] > 0.2) {
-    eye_smile = blink;
-    blink = 0;
-  }
   add_morph_frame(morph_vec, u8"まばたき", frame_number, blink);
-  add_morph_frame(morph_vec, u8"笑い", frame_number, eye_smile);
+  // まばたき/笑いの切り替えは後処理で行う
+  add_morph_frame(morph_vec, u8"CheekRaiser", frame_number, au[AUID::CheekRaiser]);
 
   add_morph_frame(morph_vec, u8"びっくり", frame_number, au[AUID::UpperLidRaiser]);
 
   // 眉
-  if (au[AUID::CheekRaiser] > 0.2) {
-    add_morph_frame(morph_vec, u8"にこり", frame_number, au[AUID::InnerBrowRaiser]);
-    add_morph_frame(morph_vec, u8"困る", frame_number, 0);
-  } else {
-    add_morph_frame(morph_vec, u8"にこり", frame_number, 0);
-    add_morph_frame(morph_vec, u8"困る", frame_number, au[AUID::InnerBrowRaiser]);
-  }
+  add_morph_frame(morph_vec, u8"困る", frame_number, au[AUID::InnerBrowRaiser]);
+  // 困る/にこりの切り替えは後処理で行う
   add_morph_frame(morph_vec, u8"真面目", frame_number, au[AUID::OuterBrowRaiser]);
   add_morph_frame(morph_vec, u8"怒り", frame_number, au[AUID::NoseWrinkler]);
   add_morph_frame(morph_vec, u8"下", frame_number, au[AUID::BrowLowerer]);

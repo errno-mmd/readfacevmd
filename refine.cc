@@ -6,6 +6,7 @@
 #include "MMDFileIOUtil.h"
 #include "VMD.h"
 #include "interpolate.h"
+#include "readfacevmd.h"  
 
 float get_morph_weight(std::vector<VMD_Morph>& mv, uint32_t frame)
 {
@@ -51,38 +52,26 @@ void refine_morph(VMD& vmd)
           m.weight = 0;
         }
       }
-      // 笑いとまばたきは、どちらか大きいほうを残して、もう一方はゼロにする。
-      // 笑いとまばたきは、1に近いときは1にする。(薄開きにしない)
-      if (name == u8"笑い") {
-        float w = get_morph_weight(morph_map[u8"まばたき"], m.frame);
-        if (w > m.weight) {
-          m.weight = 0;
-        }
-        if (m.weight > 0.75) {
-          m.weight = 1;
-        }
-      }
+      // まばたき/笑いの切り替え
       if (name == u8"まばたき") {
-        float w = get_morph_weight(morph_map[u8"笑い"], m.frame);
-        if (w > m.weight) {
-          m.weight = 0;
-        }
         if (m.weight > 0.75) {
-          m.weight = 1;
+          m.weight = 1.0;
         }
-      }
-      // にこりと困るは、どちらか大きいほうを残して、もう一方はゼロにする。
-      if (name == u8"にこり") {
-        float w = get_morph_weight(morph_map[u8"困る"], m.frame);
-        if (w > m.weight) {
-          m.weight = 0;
+        float c = get_morph_weight(morph_map[u8"CheekRaiser"], m.frame) * 5.0;
+        if (c > 1.0) {
+          c = 1.0;
         }
+        add_morph_frame(vmd.morph, u8"笑い", m.frame, m.weight * c);
+        m.weight *= (1.0 - c);
       }
+      // 困る/にこりの切り替え
       if (name == u8"困る") {
-        float w = get_morph_weight(morph_map[u8"にこり"], m.frame);
-        if (w > m.weight) {
-          m.weight = 0;
+        float c = get_morph_weight(morph_map[u8"CheekRaiser"], m.frame) * 5.0;
+        if (c > 1.0) {
+          c = 1.0;
         }
+        add_morph_frame(vmd.morph, u8"にこり", m.frame, m.weight * c);
+        m.weight *= (1.0 - c);
       }
 
       vmd.morph.push_back(m);
