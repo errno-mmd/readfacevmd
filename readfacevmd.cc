@@ -19,6 +19,7 @@
 #include "MMDFileIOUtil.h"
 #include "VMD.h"
 #include "morph_name.h"
+#include "refine.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -315,6 +316,8 @@ RFV_DLL_DECL int read_face_vmd(const std::string& image_file_name, const std::st
   smooth_and_reduce(vmd, cutoff_freq, threshold_pos, threshold_rot, threshold_morph,
                     srcfps, tgtfps, false);
   cout << "smoothing & reduction end" << endl;
+
+  refine_morph(vmd);
 
   cout << "rename morph & bone" << endl;
   rename_morph(vmd, rename_map);

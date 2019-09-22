@@ -26,7 +26,7 @@ pkg_check_modules(OpenBLAS openblas REQUIRED)
 include_directories(${OpenBLAS_INCLUDE_DIRS})
 link_directories(${OpenBLAS_LIBRARY_DIRS})
 
-add_executable(readfacevmd readfacevmd_main.cc readfacevmd.cc MMDFileIOUtil.cc VMD.cc smooth_reduce.cc smoothvmd.cc reducevmd.cc morph_name.cc interpolate.cc fpschanger.cc)
+add_executable(readfacevmd readfacevmd_main.cc readfacevmd.cc MMDFileIOUtil.cc VMD.cc smooth_reduce.cc smoothvmd.cc reducevmd.cc morph_name.cc interpolate.cc fpschanger.cc refine.cc)
 target_link_libraries(readfacevmd LandmarkDetector)
 target_link_libraries(readfacevmd FaceAnalyser)
 target_link_libraries(readfacevmd GazeAnalyser)
