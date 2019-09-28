@@ -106,32 +106,35 @@ void add_center_frame(vector<VMD_Frame>& frame_vec, const Vector3f& pos, uint32_
 void add_gaze_pose(vector<VMD_Frame>& frame_vec, cv::Point3f gazedir_left, cv::Point3f gazedir_right,
 		   const Quaterniond& head_rot, uint32_t frame_number)
 {
-  // TODO: 目の回転補正(eye_rot_amp)の適切な値を決める
-  const double eye_rot_amp = 0.25;
-  //  cout << "gazedir_left:" << gazedir_left << endl;
-  //  cout << "gazedir_right:" << gazedir_right << endl;
-  string bone_name = u8"両目";
   Vector3d front = head_rot * Vector3d(0, 0, -1);
   Vector3d leftdir;
   leftdir.x() = gazedir_left.x;
   leftdir.y() = - gazedir_left.y;
   leftdir.z() = gazedir_left.z;
   Quaterniond rot_left = Quaterniond::FromTwoVectors(front, leftdir);
-  add_rotation_pose(frame_vec, rot_left, frame_number, bone_name);
-  //  cout << "leftdir:" << leftdir.x() << "," << leftdir.y() << "," << leftdir.z() << endl;
-  //  cout << "front:" << front.x() << "," << front.y() << "," << front.z() << endl;
-  //  dumprot(rot_left, "rot_left");
-  
-  bone_name = u8"右目";
   Vector3d rightdir;
   rightdir.x() = gazedir_right.x;
   rightdir.y() = - gazedir_right.y;
   rightdir.z() = gazedir_right.z;
-  Quaterniond rot_right = Quaterniond::FromTwoVectors(leftdir, rightdir);
-  rot_right = Quaterniond::Identity().slerp(eye_rot_amp, rot_right); // 回転量を補正
-  add_rotation_pose(frame_vec, rot_right, frame_number, bone_name);
-  //  cout << "rightdir:" << rightdir.x() << "," << rightdir.y() << "," << rightdir.z() << endl;
-  //  dumprot(rot_right, "rot_right");
+  Quaterniond rot_right = Quaterniond::FromTwoVectors(front, rightdir);
+
+  // 両目の回転 = 左目と右目の回転の平均 とする
+  Quaterniond rot_both = rot_left.slerp(0.5, rot_right);
+  //Quaterniond rot_both = rot_left;
+  rot_left = rot_both.inverse() * rot_left;
+  rot_right = rot_both.inverse() * rot_right;
+
+  // 目の回転量を補正
+  // TODO: 補正係数の適切な値を決める
+  const double amp_both = 1.0;
+  const double amp_each = 0.25;
+  rot_both = Quaterniond::Identity().slerp(amp_both, rot_both);
+  rot_right = Quaterniond::Identity().slerp(amp_each, rot_right);
+  rot_left = Quaterniond::Identity().slerp(amp_each, rot_left);
+
+  add_rotation_pose(frame_vec, rot_both, frame_number, u8"両目");
+  add_rotation_pose(frame_vec, rot_left, frame_number, u8"左目");
+  add_rotation_pose(frame_vec, rot_right, frame_number, u8"右目");
 }
 
 // 表情フレームを VMD_Morph の vector に追加する 
