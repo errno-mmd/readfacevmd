@@ -22,32 +22,32 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{A437CDC2-0FD4-48EC-B872-CB13A0A9A519}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
@@ -99,7 +99,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..\OpenFace\lib\local\LandmarkDetector\include;..\OpenFace\lib\local\FaceAnalyser\include;..\OpenFace\lib\local\GazeAnalyser\include;..\OpenFace\lib\local\Utilities\include;C:\opt\eigen;C:\opt\icu4c\include;..\OpenFace\lib\3rdParty\OpenCV\include;..\OpenFace\lib\3rdParty\OpenBLAS\include;..\OpenFace\lib\3rdParty\dlib\include\dlib\..;C:\opt\x86\boost_1_67_0;C:\opt\x86\boost_1_67_0\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\OpenFace\lib\local\LandmarkDetector\include;..\OpenFace\lib\local\FaceAnalyser\include;..\OpenFace\lib\local\GazeAnalyser\include;..\OpenFace\lib\local\Utilities\include;C:\opt\eigen;C:\opt\icu4c\include;..\OpenFace\lib\3rdParty\OpenCV\include;..\OpenFace\lib\3rdParty\OpenBLAS\include;..\OpenFace\lib\3rdParty\dlib\include\dlib\..;C:\opt\x86\boost_1_75_0;C:\opt\x86\boost_1_75_0\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization>Full</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -116,21 +116,16 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>icudt.lib;icuin.lib;icuio.lib;icutest.lib;icutu.lib;icuuc.lib;opencv_world410.lib;libopenblas.dll.a;libboost_filesystem-vc141-mt-x32-1_67.lib;libboost_program_options-vc141-mt-x32-1_67.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;dlib.lib;FaceAnalyser.lib;GazeAnalyser.lib;LandmarkDetector.lib;Utilities.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\opt\x86\icu4c\lib;..\OpenFace\lib\3rdParty\OpenCV\$(PlatformTarget)\v141\lib\$(Configuration);..\OpenFace\lib\3rdParty\OpenBLAS\lib\$(PlatformShortName);C:\opt\x86\boost_1_67_0\lib32-msvc-14.1;..\OpenFace\lib\3rdParty\dlib\lib\x86\v140\Release;..\OpenFace\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>icudt.lib;icuin.lib;icuio.lib;icutest.lib;icutu.lib;icuuc.lib;opencv_world410.lib;libopenblas.dll.a;libboost_filesystem-vc142-mt-x32-1_75.lib;libboost_program_options-vc142-mt-x32-1_75.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;dlib.lib;FaceAnalyser.lib;GazeAnalyser.lib;LandmarkDetector.lib;Utilities.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\opt\x86\icu4c\lib;..\OpenFace\lib\3rdParty\OpenCV\$(PlatformTarget)\v141\lib\$(Configuration);..\OpenFace\lib\3rdParty\OpenBLAS\lib\$(PlatformShortName);C:\opt\x86\boost_1_75_0\lib32-msvc-14.2;..\OpenFace\lib\3rdParty\dlib\lib\x86\v140\Release;..\OpenFace\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
       <Command>
       </Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\$(PlatformTarget)\$(PlatformToolset)\bin\$(Configuration)" "$(OutDir)"
-xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\bin\opencv_ffmpeg340.dll" "$(OutDir)"
-xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\bin\opencv_ffmpeg340_64.dll" "$(OutDir)"
-xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\classifiers" "$(OutDir)classifiers"
-xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\x86\v140\bin\Release\opencv_world340.dll" "$(OutDir)"
-xcopy /I /E /Y /D /C "C:\opt\x86\icu4c\bin\icudt62.dll" "$(OutDir)"
-xcopy /I /E /Y /D /C "C:\opt\x86\icu4c\bin\icuuc62.dll" "$(OutDir)"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <PreLinkEvent>
       <Command>xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenBlas\bin\$(PlatformShortName)" "$(OutDir)"
@@ -139,7 +134,7 @@ xcopy /I /E /Y /D /C "C:\opt\x86\icu4c\bin\icuuc62.dll" "$(OutDir)"</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\OpenFace\lib\local\LandmarkDetector\include;..\OpenFace\lib\local\FaceAnalyser\include;..\OpenFace\lib\local\GazeAnalyser\include;..\OpenFace\lib\local\Utilities\include;C:\opt\eigen;C:\opt\icu4c\include;..\OpenFace\lib\3rdParty\OpenCV\include;..\OpenFace\lib\3rdParty\OpenBLAS\include;..\OpenFace\lib\3rdParty\dlib\include\dlib\..;C:\opt\boost_1_67_0;C:\opt\boost_1_67_0\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\OpenFace\lib\local\LandmarkDetector\include;..\OpenFace\lib\local\FaceAnalyser\include;..\OpenFace\lib\local\GazeAnalyser\include;..\OpenFace\lib\local\Utilities\include;C:\opt\eigen;C:\opt\icu4c\include;..\OpenFace\lib\3rdParty\OpenCV\include;..\OpenFace\lib\3rdParty\OpenBLAS\include;..\OpenFace\lib\3rdParty\dlib\include\dlib\..;C:\opt\boost_1_75_0;C:\optboost_1_75_0\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -162,8 +157,8 @@ xcopy /I /E /Y /D /C "C:\opt\x86\icu4c\bin\icuuc62.dll" "$(OutDir)"</Command>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\opt\icu4c\lib64;..\OpenFace\lib\3rdParty\OpenCV\$(PlatformTarget)\v141\lib\$(Configuration);..\OpenFace\lib\3rdParty\OpenBLAS\lib\$(PlatformShortName);C:\opt\boost_1_67_0\lib64-msvc-14.1;..\OpenFace\lib\3rdParty\dlib\lib\x64\v140\Release;..\OpenFace\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>icudt.lib;icuin.lib;icuio.lib;icutest.lib;icutu.lib;icuuc.lib;opencv_world410.lib;openblas.lib;libboost_filesystem-vc141-mt-x64-1_67.lib;libboost_program_options-vc141-mt-x64-1_67.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;dlib.lib;FaceAnalyser.lib;GazeAnalyser.lib;LandmarkDetector.lib;Utilities.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\opt\icu4c\lib64;..\OpenFace\lib\3rdParty\OpenCV\$(PlatformTarget)\v141\lib\$(Configuration);..\OpenFace\lib\3rdParty\OpenBLAS\lib\$(PlatformShortName);C:\opt\boost_1_75_0\lib64-msvc-14.2;..\OpenFace\lib\3rdParty\dlib\lib\x64\v140\Release;..\OpenFace\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>icudt.lib;icuin.lib;icuio.lib;icutest.lib;icutu.lib;icuuc.lib;opencv_world410.lib;openblas.lib;libboost_filesystem-vc142-mt-x64-1_75.lib;libboost_program_options-vc142-mt-x64-1_75.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;dlib.lib;FaceAnalyser.lib;GazeAnalyser.lib;LandmarkDetector.lib;Utilities.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -173,13 +168,7 @@ xcopy /I /E /Y /D /C "C:\opt\x86\icu4c\bin\icuuc62.dll" "$(OutDir)"</Command>
       <Command>xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenBlas\bin\$(PlatformShortName)" "$(OutDir)"</Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\$(PlatformTarget)\$(PlatformToolset)\bin\$(Configuration)" "$(OutDir)"
-xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\bin\opencv_ffmpeg340.dll" "$(OutDir)"
-xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\bin\opencv_ffmpeg340_64.dll" "$(OutDir)"
-xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\classifiers" "$(OutDir)classifiers"
-xcopy /I /E /Y /D /C "..\OpenFace\lib\3rdParty\OpenCV3.4\x64\v140\bin\Release\opencv_world340.dll" "$(OutDir)"
-xcopy /I /E /Y /D /C "C:\opt\icu4c\bin64\icudt62.dll" "$(OutDir)"
-xcopy /I /E /Y /D /C "C:\opt\icu4c\bin64\icuuc62.dll" "$(OutDir)"
+      <Command>
 </Command>
     </PostBuildEvent>
     <PreBuildEvent>
@@ -195,6 +184,7 @@ xcopy /I /E /Y /D /C "C:\opt\icu4c\bin64\icuuc62.dll" "$(OutDir)"
     <ClCompile Include="readfacevmd.cc" />
     <ClCompile Include="readfacevmd_main.cc" />
     <ClCompile Include="reducevmd.cc" />
+    <ClCompile Include="refine.cc" />
     <ClCompile Include="smoothvmd.cc" />
     <ClCompile Include="smooth_reduce.cc" />
     <ClCompile Include="VMD.cc" />
