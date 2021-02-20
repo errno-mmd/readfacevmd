@@ -1,11 +1,13 @@
 cmake_minimum_required(VERSION 3.8)
+project(readfacevmd)
+
 set(CMAKE_CXX_STANDARD 17)
 
 # modify if you installed OpenFace into a different directory
 include_directories(/usr/local/include/OpenFace)
 link_directories(/usr/local/lib)
 
-find_package(OpenCV 4.0 REQUIRED COMPONENTS core imgproc calib3d highgui objdetect)
+find_package(OpenCV 4.1 REQUIRED COMPONENTS core imgproc calib3d highgui objdetect)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
 find_package(Boost 1.5.9 REQUIRED COMPONENTS filesystem system program_options)
