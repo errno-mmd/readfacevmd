@@ -133,8 +133,8 @@ void add_gaze_pose(vector<VMD_Frame>& frame_vec, cv::Point3f gazedir_left, cv::P
   rot_left = Quaterniond::Identity().slerp(amp_each, rot_left);
 
   add_rotation_pose(frame_vec, rot_both, frame_number, u8"両目");
-  add_rotation_pose(frame_vec, rot_left, frame_number, u8"左目");
-  add_rotation_pose(frame_vec, rot_right, frame_number, u8"右目");
+  add_rotation_pose(frame_vec, rot_right, frame_number, u8"左目");
+  add_rotation_pose(frame_vec, rot_left, frame_number, u8"右目");
 }
 
 // 表情フレームを VMD_Morph の vector に追加する 
