@@ -118,21 +118,13 @@ void add_gaze_pose(vector<VMD_Frame>& frame_vec, cv::Point3f gazedir_left, cv::P
   rightdir.z() = gazedir_right.z;
   Quaterniond rot_right = Quaterniond::FromTwoVectors(front, rightdir);
 
-  // 両目の回転 = 左目と右目の回転の平均 とする
-  Quaterniond rot_both = rot_left.slerp(0.5, rot_right);
-  //Quaterniond rot_both = rot_left;
-  rot_left = rot_both.inverse() * rot_left;
-  rot_right = rot_both.inverse() * rot_right;
-
   // 目の回転量を補正
   // TODO: 補正係数の適切な値を決める
   const double amp_both = 1.0;
   const double amp_each = 0.25;
-  rot_both = Quaterniond::Identity().slerp(amp_both, rot_both);
   rot_right = Quaterniond::Identity().slerp(amp_each, rot_right);
   rot_left = Quaterniond::Identity().slerp(amp_each, rot_left);
 
-  add_rotation_pose(frame_vec, rot_both, frame_number, u8"両目");
   add_rotation_pose(frame_vec, rot_right, frame_number, u8"左目");
   add_rotation_pose(frame_vec, rot_left, frame_number, u8"右目");
 }
