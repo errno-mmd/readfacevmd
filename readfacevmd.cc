@@ -222,6 +222,117 @@ void init_vmd_header(VMD_Header& h)
   strcpy(h.modelname, "dummy model");
 }
 
+
+// Custom gaze esitmater
+// following functions are based on: https://github.com/TadasBaltrusaitis/OpenFace/
+cv::Matx33f Euler2RotationMatrix(const cv::Vec3f& eulerAngles)
+{
+    cv::Matx33f rotation_matrix;
+
+    float s1 = sin(eulerAngles[0]);
+    float s2 = sin(eulerAngles[1]);
+    float s3 = sin(eulerAngles[2]);
+
+    float c1 = cos(eulerAngles[0]);
+    float c2 = cos(eulerAngles[1]);
+    float c3 = cos(eulerAngles[2]);
+
+    rotation_matrix(0, 0) = c2 * c3;
+    rotation_matrix(0, 1) = -c2 * s3;
+    rotation_matrix(0, 2) = s2;
+    rotation_matrix(1, 0) = c1 * s3 + c3 * s1 * s2;
+    rotation_matrix(1, 1) = c1 * c3 - s1 * s2 * s3;
+    rotation_matrix(1, 2) = -c2 * s1;
+    rotation_matrix(2, 0) = s1 * s3 - c1 * c3 * s2;
+    rotation_matrix(2, 1) = c3 * s1 + c1 * s2 * s3;
+    rotation_matrix(2, 2) = c1 * c2;
+
+    return rotation_matrix;
+}
+
+cv::Point3f GetPupilPosition(cv::Mat_<float> eyeLdmks3d)
+{
+    eyeLdmks3d = eyeLdmks3d.t();
+    cv::Mat_<float> irisLdmks3d = eyeLdmks3d.rowRange(0, 8);
+    cv::Point3f p(mean(irisLdmks3d.col(0))[0], mean(irisLdmks3d.col(1))[0], mean(irisLdmks3d.col(2))[0]);
+    return p;
+}
+
+void CustomEstimateGaze(const LandmarkDetector::CLNF& clnf_model, cv::Point3f& gaze_absolute, float fx, float fy, float cx, float cy, bool left_eye)
+{
+    cv::Vec6f headPose = LandmarkDetector::GetPose(clnf_model, fx, fy, cx, cy);
+    cv::Vec3f eulerAngles(headPose(3), headPose(4), headPose(5));
+    cv::Matx33f rotMat = Euler2RotationMatrix(eulerAngles);
+
+    int part = -1;
+    for (size_t i = 0; i < clnf_model.hierarchical_models.size(); ++i)
+    {
+        if (left_eye && clnf_model.hierarchical_model_names[i].compare("left_eye_28") == 0)
+        {
+            part = i;
+        }
+        if (!left_eye && clnf_model.hierarchical_model_names[i].compare("right_eye_28") == 0)
+        {
+            part = i;
+        }
+    }
+
+    if (part == -1)
+    {
+        std::cout << "Couldn't find the eye model, something wrong" << std::endl;
+        gaze_absolute = cv::Point3f(0, 0, 0);
+        return;
+    }
+
+    cv::Mat eyeLdmks3d = clnf_model.hierarchical_models[part].GetShape(fx, fy, cx, cy);
+
+    cv::Point3f pupil = GetPupilPosition(eyeLdmks3d);
+    cv::Point3f rayDir = pupil / norm(pupil);
+
+    cv::Mat faceLdmks3d = clnf_model.GetShape(fx, fy, cx, cy);
+    faceLdmks3d = faceLdmks3d.t();
+
+    int eyeIdx = 1;
+    if (left_eye)
+    {
+        eyeIdx = 0;
+    }
+
+    cv::Mat offsetMat = (cv::Mat_<float>(3, 1) << 0, -3.5, 7.0);
+    cv::Mat offsetMatT = (cv::Mat(rotMat) * offsetMat).t();
+    cv::Point3f eyeOffset = cv::Point3f(offsetMatT);
+
+    cv::Mat mat36 = faceLdmks3d.row(36 + eyeIdx * 6);
+    cv::Mat mat39 = faceLdmks3d.row(39 + eyeIdx * 6);
+    cv::Point3f eyelidL = cv::Point3f(mat36);
+    cv::Point3f eyelidR = cv::Point3f(mat39);
+    cv::Point3f eyeCentre = (eyelidL + eyelidR) / 2.0f;
+    cv::Point3f eyeballCentre = eyeCentre + eyeOffset;
+
+    // 2Dに再投影
+    float d = eyeCentre.z;
+    float l2dx = eyelidL.x * d / eyelidL.z;
+    float l2dy = eyelidL.y * d / eyelidL.z;
+    float r2dx = eyelidR.x * d / eyelidR.z;
+    float r2dy = eyelidR.y * d / eyelidR.z;
+    float p2dx = pupil.x * d / pupil.z;
+    float p2dy = pupil.y * d / pupil.z;
+    float t = (p2dx - r2dx) / (l2dx - r2dx);
+    if (t < 0.0) t = 0.0; else if (t > 1.0) t = 1.0;
+    float newZ = eyelidR.z + (eyelidL.z - eyelidR.z) * t;
+    // 新しいzで、黒目の中心位置を再計算する。
+    pupil.x = pupil.x * newZ / pupil.z;
+    pupil.y = pupil.y * newZ / pupil.z;
+    pupil.z = newZ;
+    rayDir = pupil / norm(pupil);
+
+    //cv::Point3f gazeVecAxis = RaySphereIntersect(cv::Point3f(0, 0, 0), rayDir, eyeballCentre, 12) - eyeballCentre;
+    cv::Point3f gazeVecAxis = pupil - eyeballCentre;
+
+    gaze_absolute = gazeVecAxis / norm(gazeVecAxis);
+}
+// Custom gaze esitmater
+
 // image_file_name で指定された画像/動画ファイルから表情を推定して vmd_file_name に出力する
 RFV_DLL_DECL int read_face_vmd(const std::string& image_file_name, const std::string& vmd_file_name,
 			       float cutoff_freq, float threshold_pos, float threshold_rot, float threshold_morph,
@@ -287,8 +398,9 @@ RFV_DLL_DECL int read_face_vmd(const std::string& image_file_name, const std::st
     if (face_model.eye_model) {
       cv::Point3f gazedir_left(0, 0, -1);
       cv::Point3f gazedir_right(0, 0, -1);
-      GazeAnalysis::EstimateGaze(face_model, gazedir_left, cap.fx, cap.fy, cap.cx, cap.cy, true);
-      GazeAnalysis::EstimateGaze(face_model, gazedir_right, cap.fx, cap.fy, cap.cx, cap.cy, false);
+      CustomEstimateGaze(face_model, gazedir_left, cap.fx, cap.fy, cap.cx, cap.cy, true);
+      CustomEstimateGaze(face_model, gazedir_right, cap.fx, cap.fy, cap.cx, cap.cy, false);
+
       add_gaze_pose(vmd.frame, gazedir_left, gazedir_right, rot_vmd, frame_number);
     }
   }
