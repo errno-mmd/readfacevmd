@@ -20,6 +20,7 @@
 #include "VMD.h"
 #include "morph_name.h"
 #include "refine.h"
+#include "MyGazeEstimation.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -125,8 +126,7 @@ void add_gaze_pose(vector<VMD_Frame>& frame_vec, cv::Point3f gazedir_left, cv::P
   rot_right = rot_both.inverse() * rot_right;
 
   // 目の回転量を補正
-  // TODO: 補正係数の適切な値を決める
-  const double amp_both = 1.0;
+  const double amp_both = 0.7;
   const double amp_each = 0.25;
   rot_both = Quaterniond::Identity().slerp(amp_both, rot_both);
   rot_right = Quaterniond::Identity().slerp(amp_each, rot_right);
@@ -295,8 +295,10 @@ RFV_DLL_DECL int read_face_vmd(const std::string& image_file_name, const std::st
     if (face_model.eye_model) {
       cv::Point3f gazedir_left(0, 0, -1);
       cv::Point3f gazedir_right(0, 0, -1);
-      GazeAnalysis::EstimateGaze(face_model, gazedir_left, cap.fx, cap.fy, cap.cx, cap.cy, true);
-      GazeAnalysis::EstimateGaze(face_model, gazedir_right, cap.fx, cap.fy, cap.cx, cap.cy, false);
+      //GazeAnalysis::EstimateGaze(face_model, gazedir_left, cap.fx, cap.fy, cap.cx, cap.cy, true);
+      //GazeAnalysis::EstimateGaze(face_model, gazedir_right, cap.fx, cap.fy, cap.cx, cap.cy, false);
+      MyGazeEstimation::EstimateGaze(face_model, gazedir_left, cap.fx, cap.fy, cap.cx, cap.cy, true);
+      MyGazeEstimation::EstimateGaze(face_model, gazedir_right, cap.fx, cap.fy, cap.cx, cap.cy, false);
       add_gaze_pose(vmd.frame, gazedir_left, gazedir_right, rot_vmd, frame_number);
     }
   }
