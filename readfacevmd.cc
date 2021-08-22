@@ -192,7 +192,7 @@ void estimate_facial_expression(vector<VMD_Morph>& morph_vec, double* au, uint32
   double mouth_i = 0;
   double mouth_u = au[AUID::LipTightener] * 2;
   if (mouth_a < 0.1 && mouth_u < 0.1) {
-    mouth_i = au[AUID::LipPart] * 2;
+    mouth_i = au[AUID::LipPart];
   }
   double mouth_smile = au[AUID::LipCornerPuller];
 
@@ -201,6 +201,10 @@ void estimate_facial_expression(vector<VMD_Morph>& morph_vec, double* au, uint32
   add_morph_frame(morph_vec, u8"う", frame_number, mouth_u);
   add_morph_frame(morph_vec, u8"にやり", frame_number, mouth_smile);
   add_morph_frame(morph_vec, u8"∧", frame_number, au[AUID::LipCornerDepressor]);
+  add_morph_frame(morph_vec, u8"一文字", frame_number, au[AUID::LipSuck]);
+  add_morph_frame(morph_vec, u8"口上", frame_number, au[AUID::UpperLipRaiser]);
+  add_morph_frame(morph_vec, u8"口横広げ", frame_number, au[AUID::LipStrecher]);
+  // add_morph_frame(morph_vec, u8"えくぼ", frame_number, au[AUID::Dimpler]);
 
   // 目
   double blink = au[AUID::LidTightener];
