@@ -20,7 +20,7 @@
 #include "VMD.h"
 #include "morph_name.h"
 #include "refine.h"
-#include "MyGazeEstimation.h"
+#include "eye_rotation.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -104,29 +104,21 @@ void add_center_frame(vector<VMD_Frame>& frame_vec, const Vector3f& pos, uint32_
 }
 
 // 目の向き(回転)のキーフレームを VMD_Frame の vector に追加する
-void add_gaze_pose(vector<VMD_Frame>& frame_vec, cv::Point3f gazedir_left, cv::Point3f gazedir_right,
+void add_gaze_pose(vector<VMD_Frame>& frame_vec, const cv::Mat& image, const cv::Mat_<float>& detected_landmarks,
 		   const Quaterniond& head_rot, uint32_t frame_number)
 {
-  Vector3d front = head_rot * Vector3d(0, 0, -1);
-  Vector3d leftdir;
-  leftdir.x() = gazedir_left.x;
-  leftdir.y() = - gazedir_left.y;
-  leftdir.z() = gazedir_left.z;
-  Quaterniond rot_left = Quaterniond::FromTwoVectors(front, leftdir);
-  Vector3d rightdir;
-  rightdir.x() = gazedir_right.x;
-  rightdir.y() = - gazedir_right.y;
-  rightdir.z() = gazedir_right.z;
-  Quaterniond rot_right = Quaterniond::FromTwoVectors(front, rightdir);
+  Quaterniond rot_left = Quaterniond::Identity();
+  estimate_eye_pose(rot_left, image, head_rot, detected_landmarks, true);
+  Quaterniond rot_right = Quaterniond::Identity();
+  estimate_eye_pose(rot_right, image, head_rot, detected_landmarks, false);
 
   // 両目の回転 = 左目と右目の回転の平均 とする
   Quaterniond rot_both = rot_left.slerp(0.5, rot_right);
-  //Quaterniond rot_both = rot_left;
   rot_left = rot_both.inverse() * rot_left;
   rot_right = rot_both.inverse() * rot_right;
 
   // 目の回転量を補正
-  const double amp_both = 0.7;
+  const double amp_both = 1.5;
   const double amp_each = 0.25;
   rot_both = Quaterniond::Identity().slerp(amp_both, rot_both);
   rot_right = Quaterniond::Identity().slerp(amp_each, rot_right);
@@ -218,12 +210,16 @@ void estimate_facial_expression(vector<VMD_Morph>& morph_vec, double* au, uint32
   add_morph_frame(morph_vec, u8"びっくり", frame_number, au[AUID::UpperLidRaiser]);
 
   // 眉
-  add_morph_frame(morph_vec, u8"困る", frame_number, au[AUID::InnerBrowRaiser]);
-  // 困る/にこりの切り替えは後処理で行う
-  add_morph_frame(morph_vec, u8"真面目", frame_number, au[AUID::OuterBrowRaiser]);
+  if (au[AUID::InnerBrowRaiser] > au[AUID::OuterBrowRaiser]) {
+    add_morph_frame(morph_vec, u8"上", frame_number, au[AUID::OuterBrowRaiser]);
+    add_morph_frame(morph_vec, u8"困る", frame_number, au[AUID::InnerBrowRaiser] - au[AUID::OuterBrowRaiser]);
+    // 困る/にこりの切り替えは後処理で行う
+  } else {
+    add_morph_frame(morph_vec, u8"上", frame_number, au[AUID::InnerBrowRaiser]);
+    add_morph_frame(morph_vec, u8"真面目", frame_number, au[AUID::OuterBrowRaiser] - au[AUID::InnerBrowRaiser]);
+  }
   add_morph_frame(morph_vec, u8"怒り", frame_number, au[AUID::NoseWrinkler]);
   add_morph_frame(morph_vec, u8"下", frame_number, au[AUID::BrowLowerer]);
-  add_morph_frame(morph_vec, u8"上", frame_number, au[AUID::UpperLidRaiser]);
 }
 
 void init_vmd_header(VMD_Header& h)
@@ -297,13 +293,11 @@ RFV_DLL_DECL int read_face_vmd(const std::string& image_file_name, const std::st
 
     // 目の向きを推定する
     if (face_model.eye_model) {
-      cv::Point3f gazedir_left(0, 0, -1);
-      cv::Point3f gazedir_right(0, 0, -1);
-      //GazeAnalysis::EstimateGaze(face_model, gazedir_left, cap.fx, cap.fy, cap.cx, cap.cy, true);
-      //GazeAnalysis::EstimateGaze(face_model, gazedir_right, cap.fx, cap.fy, cap.cx, cap.cy, false);
-      MyGazeEstimation::EstimateGaze(face_model, gazedir_left, cap.fx, cap.fy, cap.cx, cap.cy, true);
-      MyGazeEstimation::EstimateGaze(face_model, gazedir_right, cap.fx, cap.fy, cap.cx, cap.cy, false);
-      add_gaze_pose(vmd.frame, gazedir_left, gazedir_right, rot_vmd, frame_number);
+      // cv::Point3f gazedir_left(0, 0, -1);
+      // cv::Point3f gazedir_right(0, 0, -1);
+      // GazeAnalysis::EstimateGaze(face_model, gazedir_left, cap.fx, cap.fy, cap.cx, cap.cy, true);
+      // GazeAnalysis::EstimateGaze(face_model, gazedir_right, cap.fx, cap.fy, cap.cx, cap.cy, false);
+      add_gaze_pose(vmd.frame, image, face_model.detected_landmarks, rot_vmd, frame_number);
     }
   }
 
