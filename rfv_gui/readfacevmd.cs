@@ -72,7 +72,7 @@ namespace rfv_gui
                 }
                 if (! String.IsNullOrWhiteSpace(text_nameconf_file.Text))
                 {
-                    cmd_arg += " --nameconf " + text_nameconf_file.Text;
+                    cmd_arg += " --nameconf " + "\"" + text_nameconf_file.Text + "\"";
                 }
                 cmd_arg += " \"" + image_file_name + "\" \"" + vmd_file_name + "\"";
 
