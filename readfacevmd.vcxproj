@@ -177,11 +177,11 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="eye_rotation.cc" />
     <ClCompile Include="fpschanger.cc" />
     <ClCompile Include="interpolate.cc" />
     <ClCompile Include="MMDFileIOUtil.cc" />
     <ClCompile Include="morph_name.cc" />
-    <ClCompile Include="MyGazeEstimation.cc" />
     <ClCompile Include="readfacevmd.cc" />
     <ClCompile Include="readfacevmd_main.cc" />
     <ClCompile Include="reducevmd.cc" />
@@ -191,10 +191,10 @@
     <ClCompile Include="VMD.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="eye_rotation.h" />
     <ClInclude Include="fpschanger.h" />
     <ClInclude Include="interpolate.h" />
     <ClInclude Include="MMDFileIOUtil.h" />
-    <ClInclude Include="MyGazeEstimation.h" />
     <ClInclude Include="readfacevmd.h" />
     <ClInclude Include="reducevmd.h" />
     <ClInclude Include="smoothvmd.h" />

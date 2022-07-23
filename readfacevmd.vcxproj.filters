@@ -48,7 +48,7 @@
     <ClCompile Include="refine.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MyGazeEstimation.cc">
+    <ClCompile Include="eye_rotation.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,7 +77,7 @@
     <ClInclude Include="fpschanger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyGazeEstimation.h">
+    <ClInclude Include="eye_rotation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
